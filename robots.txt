@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hadasa-beauty.github.io/sitemap.xml
