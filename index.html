@@ -626,6 +626,49 @@ html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;trans
 .lb-slide img{backface-visibility:hidden;transform:translateZ(0)}
 .secret{-webkit-text-security:disc}
 .draft-bar[hidden],.admin-pill[hidden],#lightbox[hidden],#editor[hidden],#docbox[hidden]{display:none!important}
+/* ===== about the owner ===== */
+.about-me{display:grid;gap:28px;align-items:center;margin:20px 0 56px;padding:28px 0 8px;border-top:1px solid var(--line);scroll-margin-top:24px}
+.about-me:focus{outline:none}
+@media (min-width:800px){.about-me{grid-template-columns:minmax(260px,.85fr) 1.15fr;gap:56px;padding-top:48px}}
+.am-photo{margin:0;justify-self:center;width:min(360px,82vw);padding:8px;border:1px solid var(--gold);border-radius:999px 999px 22px 22px}
+.am-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:999px 999px 16px 16px;display:block}
+.am-kicker{margin:0 0 6px;color:var(--accent);font-weight:600;font-size:.875rem;letter-spacing:.08em}
+.am-copy h2{font-family:var(--display);font-weight:400;font-size:clamp(2rem,5vw,3.25rem);line-height:1.05;letter-spacing:-.015em;margin:0 0 16px}
+.am-text p{margin:0 0 12px;max-width:60ch;color:var(--ink)}
+.am-points{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.am-points li{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:.9375rem}
+.am-points li::before{content:"✦";color:var(--accent);margin-inline-end:8px;font-size:.75em}
+.am-sign{font-family:var(--display);font-size:1.75rem;margin:18px 0 18px;color:var(--accent)}
+.am-copy .cta{margin-top:4px}
+/* per design set */
+[data-skin="classic"] .am-photo{box-shadow:0 30px 60px -40px rgba(60,20,45,.55)}
+[data-skin="editorial"] .am-photo,[data-skin="editorial"] .am-photo img{border-radius:0;border:0;padding:0}
+[data-skin="editorial"] .am-copy h2{font-weight:700;font-size:clamp(2.25rem,6vw,4rem)}
+[data-skin="editorial"] .am-text p:first-child{font-family:var(--display);font-size:1.375rem;line-height:1.4}
+[data-skin="editorial"] .about-me{border-top:1px solid var(--ink)}
+[data-skin="night"] .am-photo,[data-skin="night"] .am-photo img{border-radius:50%}
+[data-skin="night"] .am-photo img{aspect-ratio:1/1}
+[data-skin="night"] .am-photo{box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 45%,transparent),0 0 70px 10px color-mix(in srgb,var(--gold) 20%,transparent);border-color:transparent}
+[data-skin="night"] .am-copy h2{background:linear-gradient(100deg,#F6D7BF,#D4A27F 40%,#FFF0E4 60%,#C98E6C);-webkit-background-clip:text;background-clip:text;color:transparent}
+[data-skin="pastel"] .am-photo{background:#fff;border:0;border-radius:6px;padding:10px 10px 40px;transform:rotate(-3deg);box-shadow:0 20px 40px -20px rgba(90,30,60,.55);width:min(320px,78vw)}
+[data-skin="pastel"] .am-photo img{border-radius:3px}
+[data-skin="pastel"] .am-points li:nth-child(3n+1){background:color-mix(in srgb,#F7B8C8 35%,var(--surface))}
+[data-skin="pastel"] .am-points li:nth-child(3n+2){background:color-mix(in srgb,#C9B6F2 35%,var(--surface))}
+[data-skin="pastel"] .am-points li:nth-child(3n+3){background:color-mix(in srgb,#FFC9A6 38%,var(--surface))}
+[data-skin="mosaic"] .about-me{background:var(--surface);border:0;border-radius:26px;padding:28px 22px}
+@media (min-width:800px){[data-skin="mosaic"] .about-me{padding:44px}}
+[data-skin="mosaic"] .am-photo,[data-skin="mosaic"] .am-photo img{border-radius:20px}
+[data-skin="mosaic"] .am-photo{border:0;padding:0}
+[data-skin="catalog"] .am-photo,[data-skin="catalog"] .am-photo img{border-radius:50%}
+[data-skin="catalog"] .am-photo img{aspect-ratio:1/1}
+[data-skin="catalog"] .am-photo{width:min(220px,60vw);border:0;padding:0;box-shadow:0 0 0 4px var(--bg),0 0 0 5px var(--line)}
+[data-skin="catalog"] .about-me{text-align:center}
+[data-skin="catalog"] .am-text p{margin-inline:auto}
+[data-skin="catalog"] .am-points{justify-content:center}
+[data-skin="motion"] .am-photo{border:0;padding:0;border-radius:28px;overflow:hidden}
+[data-skin="motion"] .am-photo img{border-radius:28px;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+[data-skin="motion"] .about-me:hover .am-photo img{transform:scale(1.04)}
+@media (prefers-reduced-motion:reduce){[data-skin="motion"] .about-me:hover .am-photo img{transform:none}}
 </style>
 </head>
 <body>
@@ -641,7 +684,7 @@ function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(
 
 var DEFAULTS = {
   v:2,
-  site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', priceText:'', gcCode:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
+  site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', ownerPhoto:'', aboutTitle:'', ownerName:'', aboutText:'', aboutPoints:'', priceText:'', gcCode:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
   categories:[{id:'c1',name:'כלות'},{id:'c2',name:'ערב ואירועים'},{id:'c3',name:'בת מצווה'}],
   works:[]
 };
@@ -1053,7 +1096,8 @@ function heroHTML(skin, s, vis, wa){
   var title = (skin !== 'night' || !s.logo || s.showName ? '<h1>'+esc(s.name)+'</h1>' : '<h1 class="sr">'+esc(s.name)+'</h1>');
   var tag = s.tagline ? '<p class="tagline">'+esc(s.tagline)+'</p>' : '', about = s.about ? '<p class="about">'+esc(s.about)+'</p>' : '';
   var ctas = '<div class="ctas">' + (wa ? '<a class="cta" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'לתיאום מועד בוואטסאפ</a>' : '') +
-    (draft.prices.length ? '<button class="cta ghost" data-act="show-prices">'+ICON_PRICE+'מחירון</button>' : vis.length ? '<a class="cta ghost" href="#works">לכל העבודות</a>' : '') + '</div>';
+    (draft.prices.length ? '<button class="cta ghost" data-act="show-prices">'+ICON_PRICE+'מחירון</button>' : vis.length ? '<a class="cta ghost" href="#works">לכל העבודות</a>' : '') +
+    (hasAbout(s) ? '<a class="cta ghost am-link" href="#about">קצת עליי</a>' : '') + '</div>';
   function shot(w, cls, full, inner){
     if (!w) return '<div class="'+cls+' empty" aria-hidden="true">'+(inner||'')+'<div class="ph-fill"></div></div>';
     return '<button class="'+cls+'" data-open="'+w.id+'" aria-label="'+esc(altText(w))+'">'+(inner||'')+'<img src="'+esc(src(full ? w.images[0].full : w.images[0].thumb))+'" alt=""></button>';
@@ -1104,6 +1148,7 @@ function heroHTML(skin, s, vis, wa){
       '<div class="ct-actions">' + (wa ? '<a class="ct-act" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'<span>הודעה</span></a>' : '') +
         (s.phone ? '<a class="ct-act" href="tel:'+esc(s.phone.replace(/[^\d+]/g,''))+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>חיוג</span></a>' : '') +
         (s.instagram ? '<a class="ct-act" href="'+esc(s.instagram)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>אינסטגרם</span></a>' : '') +
+        (hasAbout(s) ? '<a class="ct-act" href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>קצת עליי</span></a>' : '') +
         (draft.prices.length ? '<button class="ct-act" data-act="show-prices">'+ICON_PRICE+'<span>מחירון</span></button>' : '') +
         (vis.length ? '<a class="ct-act" href="#works"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span>קטלוג</span></a>' : '') +
       '</div></header>';
@@ -1115,6 +1160,20 @@ function heroHTML(skin, s, vis, wa){
   }
   return '<header class="hero"><div>' + logo('hero-logo') + title + tag + about + ctas + '</div><div class="arches">' +
     [0,1,2].map(function(i){ var w = pick[i]; return w ? '<button class="arch" data-open="'+w.id+'" aria-label="'+esc(altText(w))+'"><div class="in"><img src="'+esc(src(w.images[0].thumb))+'" alt=""></div></button>' : '<div class="arch empty" aria-hidden="true"><div class="in"></div></div>'; }).join('') + '</div></header>';
+}
+function hasAbout(s){ return !!((s.aboutText || '').trim() || s.ownerPhoto); }
+function aboutHTML(s, wa){
+  if (!hasAbout(s)) return '';
+  var pts = (s.aboutPoints || '').split('\n').map(function(x){ return x.trim(); }).filter(Boolean).slice(0, 6);
+  var title = s.aboutTitle || 'נעים להכיר';
+  return '<section class="about-me" id="about" tabindex="-1" aria-labelledby="about-h">' +
+    (s.ownerPhoto ? '<figure class="am-photo"><img src="'+esc(src(s.ownerPhoto))+'" alt="'+esc(s.ownerName ? s.ownerName + ', ' + s.name : 'בעלת העסק, ' + s.name)+'" loading="lazy"></figure>' : '') +
+    '<div class="am-copy"><p class="am-kicker">קצת עליי</p><h2 id="about-h">'+esc(title)+'</h2>' +
+      (s.aboutText ? '<div class="am-text">' + esc(s.aboutText).split(/\n{2,}/).map(function(par){ return '<p>'+par.replace(/\n/g,'<br>')+'</p>'; }).join('') + '</div>' : '') +
+      (pts.length ? '<ul class="am-points">' + pts.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('') + '</ul>' : '') +
+      (s.ownerName ? '<p class="am-sign">'+esc(s.ownerName)+'</p>' : '') +
+      (wa ? '<a class="cta" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'לתיאום מועד בוואטסאפ</a>' : '') +
+    '</div></section>';
 }
 function altText(w){ return [w.title || TYPE_LABEL[w.type], catName(w.cat)].filter(Boolean).join(', '); }
 function plural(n){ return n === 1 ? 'עבודה אחת' : n + ' עבודות'; }
@@ -1146,10 +1205,10 @@ function render(){
           usedCats.map(function(c){ return '<button class="chip" data-cat="'+c.id+'" aria-pressed="'+(ui.cat===c.id)+'">'+esc(c.name)+'</button>'; }).join('') + '</div>' : '') +
         (hasHair && hasMk ? '<div class="seg" role="group" aria-label="סוג עבודה">' + [['all','הכל'],['hair','תסרוקות'],['makeup','איפור']].map(function(p){ return '<button data-type="'+p[0]+'" aria-pressed="'+(ui.type===p[0])+'">'+p[1]+'</button>'; }).join('') + '</div>' : '') +
       '</div></div>' +
-      '<p class="count" id="count" aria-live="polite"></p><div class="grid" id="grid"></div></section></main>' +
+      '<p class="count" id="count" aria-live="polite"></p><div class="grid" id="grid"></div></section>' + aboutHTML(s, wa) + '</main>' +
     '<footer class="foot"><div>' + (s.logo ? '<img class="foot-logo" src="'+esc(src(s.logo))+'" alt="">' : '') + '<strong>'+esc(s.name)+'</strong><div>'+esc(s.tagline)+'</div></div>' +
       '<div>' + (s.phone ? '<div>'+esc(s.phone)+'</div>' : '') + (s.instagram ? '<a href="'+esc(s.instagram)+'" target="_blank" rel="noopener">אינסטגרם</a>' : '') + '</div>' +
-      '<div class="legal">' + (draft.prices.length ? '<button class="linkbtn" data-act="show-prices">מחירון</button>' : '') + '<button class="linkbtn" data-act="show-a11y">הצהרת נגישות</button><button class="linkbtn" data-act="show-privacy">מדיניות פרטיות</button></div></footer></div>' +
+      '<div class="legal">' + (hasAbout(s) ? '<a class="linkbtn" href="#about">קצת עליי</a>' : '') + (draft.prices.length ? '<button class="linkbtn" data-act="show-prices">מחירון</button>' : '') + '<button class="linkbtn" data-act="show-a11y">הצהרת נגישות</button><button class="linkbtn" data-act="show-privacy">מדיניות פרטיות</button></div></footer></div>' +
   '<button class="a11y-btn" data-act="a11y-open" aria-label="הגדרות נגישות" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg></button>' +
   (wa ? '<a class="wa-float" href="'+esc(wa)+'" target="_blank" rel="noopener" aria-label="שליחת הודעה בוואטסאפ">'+ICON_CHAT+'</a>' : '');
   renderGrid(); renderOwnerChrome();
@@ -1431,7 +1490,7 @@ function closeLB(v){
 /* ---------- owner chrome ---------- */
 function pendingChanges(){
   var out = [], S = saved, D = draft;
-  var SITE = {name:'שם העסק', tagline:'שורת התיאור', about:'„כמה מילים עליי”', phone:'מספר הוואטסאפ', waMessage:'הודעת הוואטסאפ', instagram:'קישור האינסטגרם', logo:'הלוגו', cover:'תמונת השער', priceText:'נוסח המחירון', showName:'הצגת השם ליד הלוגו', gcCode:'קוד הסטטיסטיקה', a11yName:'רכז/ת הנגישות', a11yPhone:'טלפון לפניות נגישות', a11yEmail:'דוא"ל לפניות נגישות'};
+  var SITE = {name:'שם העסק', tagline:'שורת התיאור', about:'„כמה מילים עליי”', phone:'מספר הוואטסאפ', waMessage:'הודעת הוואטסאפ', instagram:'קישור האינסטגרם', logo:'הלוגו', cover:'תמונת השער', priceText:'נוסח המחירון', showName:'הצגת השם ליד הלוגו', gcCode:'קוד הסטטיסטיקה', a11yName:'רכז/ת הנגישות', a11yPhone:'טלפון לפניות נגישות', a11yEmail:'דוא"ל לפניות נגישות', ownerPhoto:'התמונה ב„קצת עליי”', aboutTitle:'הכותרת ב„קצת עליי”', ownerName:'השם ב„קצת עליי”', aboutText:'הטקסט ב„קצת עליי”', aboutPoints:'הנקודות ב„קצת עליי”'};
   Object.keys(SITE).forEach(function(k){ if ((S.site[k] || '') !== (D.site[k] || '')) out.push('שונה: ' + SITE[k]); });
   if (JSON.stringify(S.theme) !== JSON.stringify(D.theme)) out.push(S.theme.skin !== D.theme.skin ? 'סט עיצובי חדש: ' + SKINS[D.theme.skin].name : 'שינויי עיצוב (צבעים, גופנים או צורות)');
   if (JSON.stringify(S.categories) !== JSON.stringify(D.categories)) out.push('שינויים בקטגוריות');
@@ -1690,7 +1749,16 @@ function siteTab(){
       '<label class="btn sec" style="cursor:pointer">'+(s.cover?'החלפה':'העלאה')+'<input type="file" accept="image/*" id="coverfile" style="display:none"></label>' + (s.cover ? '<button class="ic" data-act="cover-del">הסרה</button>' : '') + '</div>' +
       '<span class="hint" style="margin:0">מופיעה בראש העמוד בסט „קטלוג”. בלי תמונת שער, מוצגת העבודה הראשונה שסומנה ★.</span></div>' +
     (s.logo ? '<label class="check"><input type="checkbox" id="showname"'+(s.showName?' checked':'')+'>להציג גם את שם העסק מתחת ללוגו</label>' : '') +
-    f('name','שם העסק','text') + f('tagline','שורת תיאור קצרה','text') + f('about','כמה מילים עליי','area','למשל: שנות ניסיון, אזור עבודה, הגעה עד הבית') +
+    f('name','שם העסק','text') + f('tagline','שורת תיאור קצרה','text') + f('about','משפט פתיחה בראש העמוד (לא חובה)','area','משפט או שניים שמופיעים מתחת לשם העסק') +
+    '<hr class="st-hr"><h3 class="ed-sub" style="border:0;padding:0;margin-top:0">קצת עליי</h3>' +
+    '<p class="hint" style="margin-top:0">חלק שמציג את בעלת העסק, אחרי העבודות. הוא מופיע באתר ברגע שיש תמונה או טקסט.</p>' +
+    '<div class="field"><span class="lbl">תמונה של בעלת העסק</span><div class="logo-edit"><div class="prev" style="width:96px;height:120px">' + (s.ownerPhoto ? '<img src="'+esc(src(s.ownerPhoto))+'" alt="התמונה הנוכחית" style="width:100%;height:100%;object-fit:cover">' : 'אין תמונה') + '</div>' +
+      '<label class="btn sec" style="cursor:pointer">'+(s.ownerPhoto?'החלפה':'העלאה')+'<input type="file" accept="image/*" id="ownerfile" style="display:none"></label>' + (s.ownerPhoto ? '<button class="ic" data-act="owner-del">הסרה</button>' : '') + '</div>' +
+      '<span class="hint" style="margin:0">מומלצת תמונה לאורך, עם פנים ברורות ותאורה טובה.</span></div>' +
+    f('aboutTitle','כותרת','text','נעים להכיר') + f('ownerName','השם שלך (מופיע כחתימה)','text','הדסה') +
+    f('aboutText','מה תרצי לספר','area','למשל: איך התחלת, מה מיוחד בעבודה שלך, איך נראה יום של אירוע איתך. שורה ריקה מתחילה פסקה חדשה.') +
+    f('aboutPoints','נקודות בולטות (שורה לכל נקודה, לא חובה)','area','למשל:\nמעל 10 שנות ניסיון\nהגעה עד הבית\nניסיון איפור לפני האירוע') +
+    '<hr class="st-hr">' +
     f('phone','מספר וואטסאפ עסקי','tel','050-0000000','ממנו נבנים כל כפתורי „שליחת הודעה” בגלריה.') + f('waMessage','ההודעה שתיפתח ללקוחה בוואטסאפ','text') + f('instagram','קישור לאינסטגרם (לא חובה)','url','https://instagram.com/...') +
     '<hr style="border:0;border-top:1px solid var(--line);margin:22px 0"><div class="field"><span class="lbl">הצהרת נגישות</span>' +
       '<span class="hint" style="margin:0 0 10px">פרטי רכז/ת הנגישות מופיעים בהצהרת הנגישות שבתחתית האתר. אם לא ממלאים טלפון, יוצג טלפון העסק.</span></div>' +
@@ -1746,6 +1814,8 @@ function bindEditorInputs(box){
     files.reduce(function(p, f){ return p.then(function(){ return loadImage(f).then(function(r){ draft.prices.push(draw(r.img, 2200, 'image/jpeg', 0.9)); r.done(); }, function(){}); }); }, Promise.resolve())
       .then(function(){ busy.remove(); markDirty(); toast('המחירון נוסף. „פרסום השינויים” מעלה אותו לאתר.'); });
   });
+  var of = box.querySelector('#ownerfile'); if (of) of.addEventListener('change', function(){ var fl = of.files && of.files[0]; if (!fl) return;
+    loadImage(fl).then(function(r){ draft.site.ownerPhoto = draw(r.img, 1400, 'image/jpeg', 0.86); r.done(); markDirty(); toast('התמונה עודכנה. „פרסום השינויים” מעלה אותה לאתר.'); }, function(){ toast('הקובץ לא נטען. אפשר לנסות JPG או PNG.'); }); });
   var cf = box.querySelector('#coverfile'); if (cf) cf.addEventListener('change', function(){ var f = cf.files && cf.files[0]; if (!f) return;
     loadImage(f).then(function(r){ draft.site.cover = draw(r.img, 1800, 'image/jpeg', 0.84); r.done(); markDirty(); toast('תמונת השער עודכנה. „פרסום השינויים” מעלה אותה לאתר.'); }, function(){ toast('הקובץ לא נטען. אפשר לנסות JPG או PNG.'); }); });
   var lf = box.querySelector('#logofile'); if (lf) lf.addEventListener('change', function(){ setLogo(lf.files && lf.files[0]); });
@@ -1859,7 +1929,7 @@ function saveForm(){
 /* ---------- publish to GitHub ---------- */
 function isData(s){ return typeof s === 'string' && s.indexOf('data:') === 0; }
 function imagePaths(st){
-  var out = {}; if (st.site.logo && !isData(st.site.logo)) out[st.site.logo] = 1; if (st.site.cover && !isData(st.site.cover)) out[st.site.cover] = 1; (st.prices || []).forEach(function(p){ if (!isData(p)) out[p] = 1; });
+  var out = {}; if (st.site.logo && !isData(st.site.logo)) out[st.site.logo] = 1; if (st.site.cover && !isData(st.site.cover)) out[st.site.cover] = 1; if (st.site.ownerPhoto && !isData(st.site.ownerPhoto)) out[st.site.ownerPhoto] = 1; (st.prices || []).forEach(function(p){ if (!isData(p)) out[p] = 1; });
   st.works.forEach(function(w){ w.images.forEach(function(i){ [i.full, i.thumb].forEach(function(p){ if (p && !isData(p)) out[p] = 1; }); }); });
   return out;
 }
@@ -1893,6 +1963,7 @@ function publish(){
     baseTree = c.tree.sha;
     function queue(dataUrl, path){ uploads.push({data:dataUrl, path:path}); localSrc[path] = dataUrl; return path; }
     state.prices = state.prices.map(function(p){ return isData(p) ? queue(p, 'images/price-' + uid() + '.jpg') : p; });
+    if (isData(state.site.ownerPhoto)) state.site.ownerPhoto = queue(state.site.ownerPhoto, 'images/owner-' + uid() + '.jpg');
     if (isData(state.site.cover)) state.site.cover = queue(state.site.cover, 'images/cover-' + uid() + '.jpg');
     if (isData(state.site.logo)) state.site.logo = queue(state.site.logo, 'images/logo-' + uid() + (state.site.logo.indexOf('image/png') > 0 ? '.png' : '.jpg'));
     state.works.forEach(function(w){ w.images = w.images.map(function(i){
@@ -1987,6 +2058,7 @@ document.addEventListener('click', function(e){
       ed.pending = null; draft = clone(saved); dirty = needPages; lastErr = ''; doc.open = null; renderDoc(); render(); if (ed.open) renderEditor();
       toast(needPages ? 'השינויים בוטלו. נשאר רק עדכון חד-פעמי של מספרי העבודות, שדורש פרסום אחד.' : 'השינויים בוטלו. הגלריה חזרה למה שמפורסם באתר.', 6000); break;
     case 'col-back': ui.cat = 'all'; ui.all = false; ui.q = ''; var qi = document.getElementById('q'); if (qi) qi.value = ''; renderGrid(); scrollWorks(); break;
+    case 'owner-del': draft.site.ownerPhoto = ''; markDirty(); break;
     case 'cover-del': draft.site.cover = ''; markDirty(); break;
     case 'lb-close': closeLB(); break;
     case 'img-prev': stepImg(-1); break;
