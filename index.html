@@ -9,7 +9,6 @@
 <meta property="og:title" content="הדסה איפור ותסרוקות ערב">
 <meta property="og:description" content="תסרוקות ערב ואיפור לנשים ולנערות">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hadasa-beauty.github.io/images/p74gmzwrjx-t.jpg">
 <!--/og-->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -593,6 +592,33 @@ a,button{touch-action:manipulation}
 .st-cats em{font-style:normal;text-align:left;font-variant-numeric:tabular-nums;color:var(--muted)}
 .st-hr{border:0;border-top:1px solid var(--line);margin:22px 0}
 .st-period{vertical-align:middle}
+
+/* ===== fixed home logo (top-right in RTL) ===== */
+.home-badge{position:fixed;right:16px;top:calc(12px + env(safe-area-inset-top,0px));z-index:21;width:58px;height:58px;padding:0;border:0;border-radius:50%;background:var(--surface);box-shadow:0 0 0 3px color-mix(in srgb,var(--surface) 80%,transparent),0 10px 24px -10px rgba(0,0,0,.45);cursor:pointer;transition:scale .12s ease-out,opacity .3s,transform .3s}
+.home-badge img{width:100%;height:100%;object-fit:contain;border-radius:50%;display:block}
+.home-badge:active{scale:.94;transition-duration:.06s}
+@media (min-width:900px){.home-badge{width:68px;height:68px;right:24px;top:18px}}
+html:has(#draft-bar:not([hidden])) .home-badge{top:calc(60px + env(safe-area-inset-top,0px))}
+[data-skin="night"] .home-badge{opacity:0;pointer-events:none;transform:translateY(-8px)}
+html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;transform:none}
+.toolbar .search{margin-right:68px}
+@media (min-width:900px){.toolbar .search{margin-right:80px}}
+.ct-profile{margin-top:14px}
+.ct-meta{padding-top:0}
+.hero>div:first-child{padding-top:24px}
+.mv-slide figcaption{right:auto;left:18px}
+@media (min-width:700px){.mv-ctrl{left:auto;right:24px}}
+/* price list: WhatsApp button text was the same color as its background */
+.docpage a.cta{color:var(--accent-ink);text-decoration:none}
+.docpage a.cta svg{color:currentColor}
+/* editor tabs: swipe sideways on narrow phones */
+.ed-tabs{overflow-x:auto;overflow-y:hidden;flex-wrap:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-padding-inline:18px}
+.ed-tabs::-webkit-scrollbar{display:none}
+.ed-tabs button{flex:none;white-space:nowrap}
+@media (max-width:520px){
+  .ed-tabs{gap:0;padding-inline:10px;-webkit-mask-image:linear-gradient(to left,#000 88%,transparent);mask-image:linear-gradient(to left,#000 88%,transparent)}
+  .ed-tabs button{padding:9px 11px}
+}
 </style>
 </head>
 <body>
@@ -638,9 +664,9 @@ var PRESETS = {
           dark:{bg:'#111111',surface:'#1B1B1B',ink:'#F2F2F2',muted:'#A8A8A8',accent:'#F2F2F2',blush:'#2A2A2A',gold:'#777777',line:'#2E2E2E'}}
 };
 var FONT_SPEC = {'Bellefair':'Bellefair','Frank Ruhl Libre':'Frank+Ruhl+Libre:wght@300;400;700','Suez One':'Suez+One','Secular One':'Secular+One','Amatic SC':'Amatic+SC:wght@400;700',
-  'Assistant':'Assistant:wght@300;400;600;700','Heebo':'Heebo:wght@300;400;600;700','Rubik':'Rubik:wght@300;400;600;700','Varela Round':'Varela+Round','Noto Sans Hebrew':'Noto+Sans+Hebrew:wght@300;400;600;700'};
-var DISPLAY_FONTS = ['Bellefair','Frank Ruhl Libre','Suez One','Secular One','Amatic SC'];
-var BODY_FONTS = ['Assistant','Heebo','Rubik','Varela Round','Noto Sans Hebrew'];
+  'Assistant':'Assistant:wght@300;400;600;700','Heebo':'Heebo:wght@300;400;600;700','Rubik':'Rubik:wght@300;400;600;700','Varela Round':'Varela+Round','Noto Sans Hebrew':'Noto+Sans+Hebrew:wght@300;400;600;700', 'David Libre':'David+Libre:wght@400;700', 'Miriam Libre':'Miriam+Libre:wght@400;700', 'Karantina':'Karantina:wght@300;400;700', 'Bona Nova':'Bona+Nova:wght@400;700', 'Noto Serif Hebrew':'Noto+Serif+Hebrew:wght@300;400;700', 'Playpen Sans Hebrew':'Playpen+Sans+Hebrew:wght@300;400;700', 'Solitreo':'Solitreo', 'Fredoka':'Fredoka:wght@300;400;600;700', 'Alef':'Alef:wght@400;700', 'Open Sans':'Open+Sans:wght@300;400;600;700', 'IBM Plex Sans Hebrew':'IBM+Plex+Sans+Hebrew:wght@300;400;600;700', 'Arimo':'Arimo:wght@400;600;700'};
+var DISPLAY_FONTS = ['Bellefair','Frank Ruhl Libre','Suez One','Secular One','Amatic SC','David Libre','Miriam Libre','Noto Serif Hebrew','Bona Nova','Karantina','Fredoka','Playpen Sans Hebrew','Solitreo'];
+var BODY_FONTS = ['Assistant','Heebo','Rubik','Varela Round','Noto Sans Hebrew','Alef','Open Sans','IBM Plex Sans Hebrew','Arimo','Fredoka','Miriam Libre','David Libre','Playpen Sans Hebrew'];
 var SKINS = {
   classic:{name:'בוטיק קלאסי', desc:'קשתות כמו מראות, ורוד פודרה וזהב', preset:'powder', display:'Bellefair', body:'Assistant'},
   editorial:{name:'מגזין אופנה', desc:'תמונת שער ענקית, כותרות דרמטיות ומספור עבודות', preset:'editorial', display:'Frank Ruhl Libre', body:'Assistant'},
@@ -1013,8 +1039,8 @@ function waNumber(){ var d = String(draft.site.phone||'').replace(/\D/g,''); if 
 function waLink(text){ var n = waNumber(); return n ? 'https://wa.me/' + n + '?text=' + encodeURIComponent(text || draft.site.waMessage || '') : ''; }
 function heroHTML(skin, s, vis, wa){
   var feat = vis.filter(function(w){ return w.featured; }), pick = feat.length ? feat.concat(vis.filter(function(w){ return !w.featured; })) : vis;
-  function logo(cls){ return s.logo ? '<img class="'+cls+'" src="'+esc(src(s.logo))+'" alt="'+esc(s.name)+'">' : ''; }
-  var title = (!s.logo || s.showName ? '<h1>'+esc(s.name)+'</h1>' : '<h1 class="sr">'+esc(s.name)+'</h1>');
+  function logo(cls){ return s.logo && cls === 'nt-logo' ? '<img class="'+cls+'" src="'+esc(src(s.logo))+'" alt="'+esc(s.name)+'">' : ''; }
+  var title = (skin !== 'night' || !s.logo || s.showName ? '<h1>'+esc(s.name)+'</h1>' : '<h1 class="sr">'+esc(s.name)+'</h1>');
   var tag = s.tagline ? '<p class="tagline">'+esc(s.tagline)+'</p>' : '', about = s.about ? '<p class="about">'+esc(s.about)+'</p>' : '';
   var ctas = '<div class="ctas">' + (wa ? '<a class="cta" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'לתיאום מועד בוואטסאפ</a>' : '') +
     (draft.prices.length ? '<button class="cta ghost" data-act="show-prices">'+ICON_PRICE+'מחירון</button>' : vis.length ? '<a class="cta ghost" href="#works">לכל העבודות</a>' : '') + '</div>';
@@ -1063,7 +1089,7 @@ function heroHTML(skin, s, vis, wa){
     var cv = s.cover ? src(s.cover) : (pick[0] ? src(pick[0].images[0].full) : '');
     return '<header class="hero hero-catalog"><div class="ct-cover">' + (cv ? '<img src="'+esc(cv)+'" alt="">' : '<div class="ed-ph"></div>') +
         '<div class="ct-shade"></div><div class="ct-title"><h1>'+esc(s.name)+'</h1></div></div>' +
-      '<div class="ct-profile">' + (s.logo ? '<img class="ct-logo" src="'+esc(src(s.logo))+'" alt="">' : '') +
+      '<div class="ct-profile">' +
         '<div class="ct-meta"><strong>'+esc(s.tagline)+'</strong>' + (s.about ? '<span>'+esc(s.about)+'</span>' : '') + '</div></div>' +
       '<div class="ct-actions">' + (wa ? '<a class="ct-act" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'<span>הודעה</span></a>' : '') +
         (s.phone ? '<a class="ct-act" href="tel:'+esc(s.phone.replace(/[^\d+]/g,''))+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>חיוג</span></a>' : '') +
@@ -1101,6 +1127,7 @@ function render(){
   var wa = waLink();
   root.innerHTML =
   '<a class="skip" href="#works">דילוג לעבודות</a>' +
+  (s.logo ? '<button class="home-badge" data-act="go-home" aria-label="'+esc(s.name)+' – חזרה לראש העמוד"><img src="'+esc(src(s.logo))+'" alt=""></button>' : '') +
   '<div class="wrap">' + heroHTML(draft.theme.skin, s, vis, wa) +
     '<main><section class="browse" id="works" tabindex="-1" aria-labelledby="works-h"><h2 class="sr" id="works-h">העבודות</h2><div class="toolbar">' +
       '<div class="search">'+ICON_SEARCH+'<label class="sr" for="q">חיפוש עבודות</label><input id="q" type="search" placeholder="חיפוש: גלים, אסוף נמוך, איפור טבעי…" value="'+esc(ui.q)+'" autocomplete="off"></div>' +
@@ -1406,6 +1433,7 @@ function renderEditor(){
     (ed.login || ed.form ? '' : '<div class="ed-tabs" role="tablist">' + [['works','עבודות'],['cats','קטגוריות'],['design','עיצוב'],['stats','סטטיסטיקה'],['site','פרטי העסק']].map(function(t){ return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(ed.tab===t[0])+'">'+t[1]+'</button>'; }).join('') + '</div>') +
     '<div class="ed-body">'+body+'</div><div class="ed-foot">'+foot+'</div></aside>';
   bindEditorInputs(box);
+  var at = box.querySelector('.ed-tabs [aria-selected="true"]'); if (at && at.scrollIntoView) at.scrollIntoView({block:'nearest', inline:'nearest'});
 }
 function needConfirm(key, msg){ if (ed.pending === key){ ed.pending = null; return true; } ed.pending = key; if (msg) toast(msg, 4000); renderEditor(); return false; }
 function delLabel(key, normal){ return ed.pending === key ? 'לחיצה נוספת למחיקה' : normal; }
@@ -1863,6 +1891,14 @@ document.addEventListener('click', function(e){
     case 'mv-next': mvGo(motion.idx + 1, true); break;
     case 'mv-prev': mvGo(motion.idx - 1, true); break;
     case 'mv-toggle': mvToggle(); break;
+    case 'go-home':
+      if (lb.open){ lb.open = false; lb.closing = false; stopAnims(); renderLB(); }
+      if (doc.open){ doc.open = null; doc.ret = null; renderDoc(); }
+      closeA11y();
+      ui = {q:'', cat:'all', type:'all', all:false}; render();
+      window.scrollTo({top:0, behavior: motionAllowed() ? 'smooth' : 'auto'});
+      var bh = document.querySelector('.home-badge'); if (bh) bh.focus({preventScroll:true});
+      break;
     case 'col-back': ui.cat = 'all'; ui.all = false; ui.q = ''; var qi = document.getElementById('q'); if (qi) qi.value = ''; renderGrid(); scrollWorks(); break;
     case 'cover-del': draft.site.cover = ''; markDirty(); break;
     case 'lb-close': closeLB(); break;
@@ -1931,6 +1967,7 @@ document.addEventListener('keydown', function(e){
   else if (ed.open && e.key === 'Escape'){ if (ed.form){ ed.form = null; renderEditor(); } else closeEditor(); }
 });
 document.addEventListener('visibilitychange', function(){ document.documentElement.classList.toggle('mv-hidden', document.hidden); });
+window.addEventListener('scroll', function(){ document.documentElement.classList.toggle('scrolled', window.scrollY > 260); }, {passive:true});
 window.addEventListener('resize', function(){ if (lb.open && !TRACK.anim){ TRACK.x = lb.img * stageW(); applyTrack(); applySheet(); } });
 window.addEventListener('beforeunload', function(e){ if (dirty){ e.preventDefault(); e.returnValue = ''; } });
 
