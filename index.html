@@ -9,7 +9,6 @@
 <meta property="og:title" content="הדסה איפור ותסרוקות ערב">
 <meta property="og:description" content="תסרוקות ערב ואיפור לנשים ולנערות">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hadasa-beauty.github.io/images/p74gmzwrjx-t.jpg">
 <!--/og-->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -571,6 +570,28 @@ a,button{touch-action:manipulation}
   .ed,.docpage,.a11y-panel{animation:fadeIn .2s ease!important}
   #lightbox .lb{animation:fadeIn .2s ease!important}
 }
+
+/* ===== statistics ===== */
+.st-tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin:16px 0 4px}
+@media (min-width:520px){.st-tiles{grid-template-columns:repeat(4,1fr)}}
+.st-tile{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:flex;flex-direction:column;gap:2px}
+.st-tile span{font-size:.8125rem;color:var(--muted)}
+.st-tile strong{font-size:1.75rem;font-weight:700;letter-spacing:-.02em;line-height:1.1;font-variant-numeric:tabular-nums}
+.st-chart{display:flex;align-items:flex-end;gap:2px;height:120px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;direction:ltr}
+.st-chart i{flex:1;background:var(--accent);border-radius:3px 3px 0 0;min-width:2px}
+.st-axis{display:flex;justify-content:space-between;direction:ltr;font-size:.75rem;color:var(--muted);margin-top:4px}
+.st-axis span:last-child{direction:rtl}
+.st-row{grid-template-columns:52px 1fr auto!important}
+.st-row img{width:52px!important;height:64px!important}
+.st-nums{display:flex;flex-direction:column;align-items:flex-end;font-size:.8125rem;color:var(--muted);white-space:nowrap}
+.st-nums b{color:var(--ink);font-size:1rem;font-variant-numeric:tabular-nums}
+.st-cats{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.st-cats li{display:grid;grid-template-columns:minmax(80px,30%) 1fr 36px;gap:10px;align-items:center;font-size:.9375rem}
+.st-cats i{height:10px;border-radius:6px;background:var(--blush);overflow:hidden}
+.st-cats b{display:block;height:100%;background:var(--accent);border-radius:6px}
+.st-cats em{font-style:normal;text-align:left;font-variant-numeric:tabular-nums;color:var(--muted)}
+.st-hr{border:0;border-top:1px solid var(--line);margin:22px 0}
+.st-period{vertical-align:middle}
 </style>
 </head>
 <body>
@@ -586,7 +607,7 @@ function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(
 
 var DEFAULTS = {
   v:2,
-  site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', priceText:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
+  site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', priceText:'', gcCode:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
   categories:[{id:'c1',name:'כלות'},{id:'c2',name:'ערב ואירועים'},{id:'c3',name:'בת מצווה'}],
   works:[]
 };
@@ -731,7 +752,8 @@ function a11yStatement(){
 function privacyPolicy(){
   var s = draft.site, name = esc(s.name), ph = esc(s.phone);
   return '<h2>מדיניות פרטיות</h2>' +
-    '<p>האתר מציג את גלריית העבודות של '+name+'. האתר אינו כולל טפסים, אינו מבקש פרטים אישיים, ואינו משתמש בעוגיות מעקב, בפרסום או בכלי סטטיסטיקה.</p>' +
+    '<p>האתר מציג את גלריית העבודות של '+name+'. האתר אינו כולל טפסים, אינו מבקש פרטים אישיים, ואינו משתמש בעוגיות מעקב או בפרסום.</p>' +
+    (s.gcCode ? '<h3>סטטיסטיקת ביקורים</h3><p>כדי לדעת אילו עבודות מעניינות את המבקרות, האתר סופר ביקורים ולחיצות באופן אנונימי באמצעות השירות GoatCounter. השירות אינו משתמש בעוגיות, אינו שומר כתובות IP, ואינו מזהה מבקרות באופן אישי. נאספים רק נתונים כלליים, כמו מספר הביקורים, העבודות שנפתחו, סוג הדפדפן והמדינה.</p>' : '<p>האתר אינו משתמש בכלי סטטיסטיקה.</p>') +
     '<h3>מידע טכני</h3><p>האתר מתארח בשירות GitHub Pages, והגופנים נטענים משירות Google Fonts. כמו בכל גלישה באינטרנט, שירותים אלה מקבלים נתונים טכניים כגון כתובת IP וסוג הדפדפן, בהתאם למדיניות הפרטיות שלהם.</p>' +
     '<h3>פנייה בוואטסאפ</h3><p>לחיצה על כפתור וואטסאפ פותחת שיחה באפליקציית וואטסאפ. ההודעה נשלחת ישירות לעסק, והפרטים בה משמשים רק למענה לפנייה ולתיאום השירות.</p>' +
     '<h3>התמונות בגלריה</h3><p>התמונות מתפרסמות בהסכמת המצולמות, ובמקרה של קטינות בהסכמת הורה. מי שמופיעה בתמונה ומבקשת להסיר אותה מוזמנת לפנות אלינו, והתמונה תוסר בהקדם.</p>' +
@@ -870,6 +892,29 @@ function loadFromGitHub(){
     saveCfg(cfg);
   });
 }
+/* ---------- anonymous statistics (GoatCounter, no cookies) ---------- */
+var GC = {q:[], ready:false};
+function isOwnerDevice(){ return !!(cfg && cfg.token); }
+function setupTracking(){
+  var code = (draft.site.gcCode || '').trim().toLowerCase();
+  if (!/^[a-z0-9-]{2,50}$/.test(code)) return;
+  if (isOwnerDevice()){ try { localStorage.setItem('skipgc', 't'); } catch(e){} return; }
+  if (document.getElementById('gc-script')) return;
+  window.goatcounter = {no_onload:false};
+  var s = document.createElement('script'); s.id = 'gc-script'; s.async = true;
+  s.setAttribute('data-goatcounter', 'https://' + code + '.goatcounter.com/count');
+  s.src = 'https://gc.zgo.at/count.js';
+  s.onload = function(){ GC.ready = true; GC.q.splice(0).forEach(sendEv); };
+  document.head.appendChild(s);
+}
+function sendEv(e){ try { if (window.goatcounter && window.goatcounter.count) window.goatcounter.count({path:e.path, title:e.title, event:true}); } catch(_){} }
+function track(path, title){
+  if (!draft.site.gcCode || isOwnerDevice()) return;
+  var e = {path:path, title:title || path};
+  if (GC.ready) sendEv(e); else if (GC.q.length < 30) GC.q.push(e);
+}
+function workTitle(w){ return [workNo(w), w.title || TYPE_LABEL[w.type]].filter(Boolean).join(' · '); }
+
 function loadPublic(){
   return fetch('data.json?v=' + Date.now(), {cache:'no-store'})
     .then(function(r){ return r.ok ? r.json() : null; })
@@ -1164,7 +1209,7 @@ function renderCatalog(grid, list, vis, count){
       return '<li class="ct-item"><button class="ct-row" data-open="'+w.id+'"><span class="ct-thumb"><img src="'+esc(src(w.images[0].thumb))+'" alt="'+esc(altText(w))+'" loading="lazy">' +
           (w.images.length > 1 ? '<em>'+w.images.length+'</em>' : '') + '</span>' +
         '<span class="ct-txt"><strong>'+esc(w.title || TYPE_LABEL[w.type])+'</strong><span>'+esc([TYPE_LABEL[w.type]].concat(w.tags.slice(0,3)).join(' · '))+'</span></span></button>' +
-        (wa ? '<a class="ct-ask" href="'+esc(wa)+'" target="_blank" rel="noopener" aria-label="שאלה על '+esc(w.title || TYPE_LABEL[w.type])+' בוואטסאפ">'+ICON_CHAT+'</a>' : '') + '</li>';
+        (wa ? '<a class="ct-ask" data-no="'+w.no+'" href="'+esc(wa)+'" target="_blank" rel="noopener" aria-label="שאלה על '+esc(w.title || TYPE_LABEL[w.type])+' בוואטסאפ">'+ICON_CHAT+'</a>' : '') + '</li>';
     }).join('') + '</ul>';
 }
 /* ---------- lightbox ---------- */
@@ -1203,6 +1248,7 @@ function openLB(id, from){
   lb.list = list.map(function(w){return w.id;}); lb.i = Math.max(0, lb.list.indexOf(id)); lb.img = 0; lb.ret = from || null;
   var wasOpen = lb.open; lb.open = true; lb.closing = false; stopAnims();
   renderLB(true);
+  var tw = curWork(); if (tw && !wasOpen) track('open-' + tw.no, 'פתיחת ' + workTitle(tw));
   if (wasOpen) return;
   var el = document.querySelector('#lightbox .lb');
   if (isSheet()){
@@ -1333,6 +1379,7 @@ function doLogin(){
   cfg = {token:t, owner:o, repo:r};
   var busy = showBusy('מתחבר…');
   loadFromGitHub().then(function(){
+    try { localStorage.setItem('skipgc', 't'); } catch(e){}
     busy.remove(); ed.login = false; ed.tab = 'works'; render(); renderEditor(); toast('מחובר. אפשר לערוך את הגלריה.');
   }, function(e){ busy.remove(); cfg = null; toast(ghError(e), 6000); });
 }
@@ -1349,13 +1396,13 @@ function renderEditor(){
   if (!ed.open){ box.innerHTML = ''; box.hidden = true; if (!lb.open) document.body.style.overflow = ''; return; }
   box.hidden = false; document.body.style.overflow = 'hidden';
   var title = ed.login ? 'התחברות לעריכה' : ed.form ? (ed.form.isNew ? 'עבודה חדשה' : 'עריכת עבודה') : 'עריכת הגלריה';
-  var body = ed.login ? loginForm() : ed.form ? workForm() : ed.tab === 'works' ? worksTab() : ed.tab === 'cats' ? catsTab() : ed.tab === 'design' ? designTab() : siteTab();
+  var body = ed.login ? loginForm() : ed.form ? workForm() : ed.tab === 'works' ? worksTab() : ed.tab === 'cats' ? catsTab() : ed.tab === 'design' ? designTab() : ed.tab === 'stats' ? statsTab() : siteTab();
   var foot = ed.login ? '<span class="meter"></span><button class="btn" data-act="login">התחברות</button>'
     : ed.form ? '<span class="meter"></span><button class="btn sec" data-act="form-cancel">ביטול</button><button class="btn" data-act="form-save">שמירת העבודה</button>'
     : '<span class="meter">'+(dirty ? 'יש שינויים שעדיין לא באתר' : 'כל השינויים באתר')+'</span><button class="btn" data-act="publish"'+(dirty?'':' disabled')+'>'+(dirty?'פרסום השינויים':'הכל מפורסם')+'</button>';
   box.innerHTML = '<div class="ed-back" data-act="close-editor"></div><aside class="ed" role="dialog" aria-modal="true" aria-label="'+title+'">' +
     '<div class="ed-head"><h2>'+title+'</h2><button class="ed-x" data-act="close-editor" aria-label="סגירה">×</button></div>' +
-    (ed.login || ed.form ? '' : '<div class="ed-tabs" role="tablist">' + [['works','עבודות'],['cats','קטגוריות'],['design','עיצוב'],['site','פרטי העסק']].map(function(t){ return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(ed.tab===t[0])+'">'+t[1]+'</button>'; }).join('') + '</div>') +
+    (ed.login || ed.form ? '' : '<div class="ed-tabs" role="tablist">' + [['works','עבודות'],['cats','קטגוריות'],['design','עיצוב'],['stats','סטטיסטיקה'],['site','פרטי העסק']].map(function(t){ return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(ed.tab===t[0])+'">'+t[1]+'</button>'; }).join('') + '</div>') +
     '<div class="ed-body">'+body+'</div><div class="ed-foot">'+foot+'</div></aside>';
   bindEditorInputs(box);
 }
@@ -1403,6 +1450,86 @@ function catsTab(){
         '<button class="ic" data-act="c-down" data-id="'+c.id+'" aria-label="הזזה למטה"'+(i===draft.categories.length-1?' disabled':'')+'>↓</button>' +
         '<button class="ic" data-act="c-del" data-id="'+c.id+'" style="color:#B3261E">'+delLabel('c-del'+c.id,'מחיקה')+'</button></li>';
     }).join('') + '</ul><div class="cat-add"><label class="sr" for="newcat">קטגוריה חדשה</label><input id="newcat" placeholder="קטגוריה חדשה"><button class="btn sec" data-act="c-add">הוספה</button></div>';
+}
+var GC_KEY = 'gallery-gc-key-v1';
+var ST = {days:30, loading:false, data:null, err:'', at:0};
+function gcKey(){ try { return localStorage.getItem(GC_KEY) || ''; } catch(e){ return ''; } }
+function gcBase(){ return 'https://' + draft.site.gcCode.trim().toLowerCase() + '.goatcounter.com'; }
+function isoDay(d){ return d.toISOString().slice(0,10); }
+function gcGet(path){
+  return fetch(gcBase() + '/api/v0' + path, {headers:{'Authorization':'Bearer ' + gcKey(), 'Content-Type':'application/json'}, cache:'no-store'})
+    .then(function(r){ if (!r.ok){ var e = new Error('gc ' + r.status); e.status = r.status; throw e; } return r.json(); });
+}
+function hitCount(x){ if (!x) return 0; if (typeof x.count === 'number') return x.count; if (typeof x.count_unique === 'number') return x.count_unique;
+  return (x.stats || []).reduce(function(s, d){ return s + (+d.daily || 0); }, 0); }
+function loadStats(){
+  if (!draft.site.gcCode || !gcKey()) return;
+  ST.loading = true; ST.err = ''; renderEditor();
+  var end = new Date(), start = new Date(Date.now() - (ST.days - 1) * 864e5);
+  var q = '?start=' + isoDay(start) + 'T00:00:00Z&end=' + isoDay(end) + 'T23:59:59Z';
+  Promise.all([gcGet('/stats/total' + q), gcGet('/stats/hits' + q + '&limit=100')]).then(function(r){
+    var total = r[0] || {}, hits = (r[1] && r[1].hits) || [];
+    var days = {}; (total.stats || []).forEach(function(d){ days[d.day] = +d.daily || 0; });
+    var series = []; for (var i = ST.days - 1; i >= 0; i--){ var k = isoDay(new Date(Date.now() - i * 864e5)); series.push({day:k, n:days[k] || 0}); }
+    var ev = {}; hits.forEach(function(x){ var pth = String(x.path || '').replace(/^\//, ''); ev[pth] = (ev[pth] || 0) + hitCount(x); });
+    var pages = hits.filter(function(x){ return !x.event; }).reduce(function(s, x){ return s + hitCount(x); }, 0);
+    ST.data = {visits: typeof total.total === 'number' ? total.total : pages, series:series, ev:ev};
+    ST.loading = false; ST.at = Date.now(); renderEditor();
+  }).catch(function(e){
+    ST.loading = false;
+    ST.err = e && e.status === 401 ? 'מפתח הסטטיסטיקה לא תקין. צריך ליצור מפתח חדש ב-GoatCounter ולהדביק אותו מחדש.'
+      : e && e.status === 403 ? 'למפתח אין הרשאת קריאת סטטיסטיקה. ביצירת המפתח צריך לסמן את ההרשאה Read statistics.'
+      : e && e.status === 404 ? 'קוד האתר ב-GoatCounter לא נמצא. כדאי לבדוק את הקוד בשדה למטה.'
+      : 'לא הצלחתי לקבל את הנתונים מכאן. אפשר לראות אותם בלוח הבקרה המלא של GoatCounter, בכפתור שלמטה.';
+    renderEditor();
+  });
+}
+function bars(series){
+  var max = Math.max(1, Math.max.apply(null, series.map(function(d){ return d.n; })));
+  return '<div class="st-chart" role="img" aria-label="'+esc('ביקורים לפי יום: ' + series.map(function(d){ return d.day.slice(8) + '/' + d.day.slice(5,7) + ' ' + d.n; }).join(', '))+'">' +
+    series.map(function(d){ return '<i style="height:'+(d.n ? Math.max(4, d.n / max * 100) : 0)+'%" title="'+d.day.slice(8)+'/'+d.day.slice(5,7)+': '+d.n+'"></i>'; }).join('') + '</div>' +
+    '<div class="st-axis"><span>'+series[0].day.slice(8)+'/'+series[0].day.slice(5,7)+'</span><span>היום</span></div>';
+}
+function statsTab(){
+  var s = draft.site, key = gcKey();
+  var setup = '<div class="field"><label for="s-gcCode">קוד האתר ב-GoatCounter</label><div class="cat-add" style="margin-top:0"><input id="s-gcCode" dir="ltr" data-site="gcCode" value="'+esc(s.gcCode)+'" placeholder="hadasa"><span class="hint" style="margin:0;align-self:center" dir="ltr">.goatcounter.com</span></div>' +
+      '<span class="hint" style="margin:0">הקוד שבחרת בהרשמה. אחרי שממלאים אותו ומפרסמים, האתר מתחיל לספור.</span></div>' +
+    '<div class="field"><span class="lbl">מפתח קריאת נתונים</span>' + (key
+      ? '<div><button class="ic" data-act="gc-key-del">'+(ed.pending === 'gc-key-del' ? 'לחיצה נוספת להסרה' : 'הסרת המפתח מהמכשיר')+'</button></div>'
+      : '<div class="cat-add" style="margin-top:0"><label class="sr" for="gc-key">מפתח API</label><input id="gc-key" type="password" dir="ltr" autocomplete="off" placeholder="API key"><button class="btn sec" id="gc-key-save" type="button">שמירה</button></div>') +
+      '<span class="hint" style="margin:0">המפתח נשמר רק במכשיר הזה ומשמש רק להצגת הנתונים כאן.</span></div>';
+  if (!s.gcCode) return '<p class="hint" style="margin-top:0">כדי לראות כמה נכנסו לאתר ואילו עבודות מעניינות, מחברים את האתר לשירות הסטטיסטיקה החינמי GoatCounter. הוא סופר ביקורים בלי עוגיות ובלי לזהות מבקרות, ולכן לא צריך באנר הסכמה. שלבי החיבור מפורטים במדריך.</p>' + setup;
+  var gcLink = '<a class="btn sec" href="'+esc(gcBase())+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">לוח הבקרה המלא של GoatCounter</a>';
+  if (!key) return '<p class="hint" style="margin-top:0">האתר סופר ביקורים. כדי לראות את הנתונים כאן, מדביקים מפתח קריאה מ-GoatCounter. אפשר גם לפתוח את לוח הבקרה המלא שלהם.</p>' + gcLink + '<hr class="st-hr">' + setup;
+  if (!ST.data && !ST.loading && !ST.err) setTimeout(loadStats, 0);
+  var period = '<div class="seg st-period" role="group" aria-label="תקופה">' + [[7,'שבוע'],[30,'חודש'],[90,'3 חודשים']].map(function(p){
+    return '<button data-act="st-days" data-k="'+p[0]+'" aria-pressed="'+(ST.days===p[0])+'">'+p[1]+'</button>'; }).join('') + '</div>' +
+    '<button class="ic" data-act="st-refresh" style="margin-inline-start:8px">רענון</button>';
+  if (ST.err) return period + '<div class="warn" role="alert">'+esc(ST.err)+'</div>' + gcLink + '<hr class="st-hr">' + setup;
+  if (!ST.data) return period + '<p class="hint">טוען נתונים…</p>';
+  var D = ST.data, ev = D.ev;
+  function n(k){ return ev[k] || 0; }
+  var opens = 0, asks = 0; Object.keys(ev).forEach(function(k){ if (/^open-\d+$/.test(k)) opens += ev[k]; if (/^wa-/.test(k)) asks += ev[k]; });
+  var tiles = [['ביקורים', D.visits], ['עבודות שנפתחו', opens], ['פניות בוואטסאפ', asks], ['צפיות במחירון', n('prices')]];
+  var rows = draft.works.map(function(w){ return {w:w, o:n('open-' + w.no), a:n('wa-' + w.no)}; }).filter(function(r){ return r.o || r.a; })
+    .sort(function(x, y){ return (y.a * 3 + y.o) - (x.a * 3 + x.o); }).slice(0, 15);
+  var cats = draft.categories.map(function(c){
+    var o = draft.works.filter(function(w){ return w.cat === c.id; }).reduce(function(s, w){ return s + n('open-' + w.no); }, 0);
+    return {name:c.name, o:o, v:n('cat-' + c.id)}; }).filter(function(c){ return c.o || c.v; }).sort(function(a, b){ return b.o - a.o; });
+  var cmax = Math.max(1, Math.max.apply(null, cats.map(function(c){ return c.o; }).concat([1])));
+  return period + (ST.loading ? '<span class="hint"> מעדכן…</span>' : '') +
+    '<div class="st-tiles">' + tiles.map(function(t){ return '<div class="st-tile"><span>'+t[0]+'</span><strong>'+t[1].toLocaleString('he-IL')+'</strong></div>'; }).join('') + '</div>' +
+    '<h3 class="ed-sub">ביקורים לפי יום</h3>' + bars(D.series) +
+    '<h3 class="ed-sub">העבודות שמשכו הכי הרבה עניין</h3>' +
+    (rows.length ? '<ul class="rows">' + rows.map(function(r, i){
+      return '<li class="row st-row"><img src="'+esc(src(r.w.images[0] ? r.w.images[0].thumb : ''))+'" alt=""><div><div class="t"><span class="row-no">#'+r.w.no+'</span> '+esc(r.w.title || TYPE_LABEL[r.w.type])+'</div>' +
+        '<div class="s">'+esc(catName(r.w.cat) || 'ללא קטגוריה')+'</div></div><div class="st-nums"><span><b>'+r.o+'</b> צפיות</span><span><b>'+r.a+'</b> פניות</span></div></li>'; }).join('') + '</ul>' +
+      '<p class="hint">הדירוג נותן משקל גבוה יותר לפנייה בוואטסאפ מאשר לצפייה, כי פנייה מעידה על עניין ממשי.</p>'
+      : '<p class="hint">עוד אין צפיות בעבודות בתקופה הזו.</p>') +
+    (cats.length ? '<h3 class="ed-sub">קטגוריות</h3><ul class="st-cats">' + cats.map(function(c){
+      return '<li><span>'+esc(c.name)+'</span><i><b style="width:'+(c.o / cmax * 100)+'%"></b></i><em>'+c.o+'</em></li>'; }).join('') + '</ul><p class="hint">מספר הצפיות בעבודות של כל קטגוריה.</p>' : '') +
+    '<p class="hint">הנתונים נספרים באופן אנונימי. הכניסות מהמכשירים שמחוברים לעריכה לא נספרות. עדכון אחרון: '+new Date(ST.at).toLocaleTimeString('he-IL', {hour:'2-digit', minute:'2-digit'})+'.</p>' +
+    gcLink + '<hr class="st-hr">' + setup;
 }
 function designTab(){
   var t = draft.theme, L = lightVars(t), warn = themeWarnings(t);
@@ -1499,6 +1626,7 @@ function bindEditorInputs(box){
     el.addEventListener('input', function(){ draft.theme[el.dataset.themeColor] = el.value; applyTheme(draft.theme); });
     el.addEventListener('change', function(){ draft.theme[el.dataset.themeColor] = el.value; markDirty(); });
   });
+  var gk = box.querySelector('#gc-key-save'); if (gk) gk.addEventListener('click', function(){ var v = box.querySelector('#gc-key').value.trim(); if (!v) return; try { localStorage.setItem(GC_KEY, v); } catch(e){} ST.data = null; ST.err = ''; renderEditor(); });
   var bh = box.querySelector('#bulkhide'); if (bh) bh.addEventListener('change', function(){ ed.bulkHide = bh.checked; });
   var ak = box.querySelector('#ai-key-save'); if (ak) ak.addEventListener('click', function(){ var v = box.querySelector('#ai-key').value.trim(); if (!v) return; try{ localStorage.setItem(AI_KEY, v); }catch(e){} ed.bulkCat = AUTO; ed.bulkType = AUTO; renderEditor(); toast('הזיהוי האוטומטי מופעל במכשיר הזה.'); });
   var bf = box.querySelector('#bulkfile'); if (bf) bf.addEventListener('change', function(){ bulkAdd(bf.files); });
@@ -1708,6 +1836,13 @@ function publish(){
 
 /* ---------- events ---------- */
 document.addEventListener('click', function(e){
+  var wl = e.target.closest('a[href*="wa.me/"]');
+  if (wl){
+    var ww = lb.open ? curWork() : wl.dataset.no ? draft.works.filter(function(x){ return String(x.no) === wl.dataset.no; })[0] : null;
+    if (ww) track('wa-' + ww.no, 'וואטסאפ על ' + workTitle(ww));
+    else if (doc.open === 'prices') track('wa-prices', 'וואטסאפ מהמחירון');
+    else track('wa-general', 'וואטסאפ כללי');
+  }
   var t = e.target.closest('[data-open],[data-cat],[data-type],[data-tag],[data-act],[data-tab],[data-a11y]'); if (!t) return;
   if (t.dataset.a11y){ a11y[t.dataset.a11y] = !a11y[t.dataset.a11y]; applyA11y(); refreshA11y(); if (t.dataset.a11y === 'still' && draft.theme.skin === 'motion'){ motion.paused = !!a11y.still; render(); } return; }
   if (a11yOpen && !t.closest('#a11y-panel') && t.dataset.act !== 'a11y-open') closeA11y();
@@ -1717,10 +1852,13 @@ document.addEventListener('click', function(e){
   if (t.dataset.tag){ ui.q = t.dataset.tag; ui.cat = 'all'; ui.type = 'all'; closeLB(); render(); var g = document.getElementById('works'); if (g) g.scrollIntoView(); return; }
   if (t.dataset.tab){ ed.tab = t.dataset.tab; ed.pending = null; renderEditor(); return; }
   var a = t.dataset.act, id = t.dataset.id, w = id && draft.works.filter(function(x){return x.id===id;})[0];
-  if (ed.pending && a !== 'w-del' && a !== 'c-del' && a !== 'close-editor' && a !== 'logout' && a !== 'approve-all' && a !== 'ai-off' && a !== 'th-reset'){ ed.pending = null; if (ed.open) renderEditor(); }
+  if (ed.pending && a !== 'w-del' && a !== 'c-del' && a !== 'close-editor' && a !== 'logout' && a !== 'approve-all' && a !== 'ai-off' && a !== 'th-reset' && a !== 'gc-key-del'){ ed.pending = null; if (ed.open) renderEditor(); }
   switch (a){
     case 'clear': ui = {q:'', cat:'all', type:'all', all:false}; render(); break;
-    case 'col-open': ui.cat = t.dataset.k === '__all' ? 'all' : t.dataset.k; ui.all = t.dataset.k === '__all'; renderGrid(); scrollWorks(); break;
+    case 'st-days': ST.days = +t.dataset.k; loadStats(); break;
+    case 'st-refresh': loadStats(); break;
+    case 'gc-key-del': if (!needConfirm('gc-key-del')) return; try { localStorage.removeItem(GC_KEY); } catch(x){} ST.data = null; ST.err = ''; renderEditor(); break;
+    case 'col-open': if (t.dataset.k && t.dataset.k.indexOf('__') !== 0) track('cat-' + t.dataset.k, 'קטגוריה: ' + catName(t.dataset.k)); ui.cat = t.dataset.k === '__all' ? 'all' : t.dataset.k; ui.all = t.dataset.k === '__all'; renderGrid(); scrollWorks(); break;
     case 'mv-next': mvGo(motion.idx + 1, true); break;
     case 'mv-prev': mvGo(motion.idx - 1, true); break;
     case 'mv-toggle': mvToggle(); break;
@@ -1756,7 +1894,7 @@ document.addEventListener('click', function(e){
     case 'th-clear': draft.theme[t.dataset.k] = ''; markDirty(); break;
     case 'th-reset': if (!needConfirm('th-reset')) return; draft.theme = skinTheme(draft.theme.skin); markDirty(); break;
     case 'show-a11y': doc.ret = t; doc.open = 'a11y'; closeA11y(); renderDoc(); break;
-    case 'show-prices': doc.ret = lb.open ? null : t; if (lb.open) closeLB(); doc.open = 'prices'; renderDoc(); break;
+    case 'show-prices': track('prices', 'צפייה במחירון'); doc.ret = lb.open ? null : t; if (lb.open) closeLB(); doc.open = 'prices'; renderDoc(); break;
     case 'price-del': draft.prices.splice(+t.dataset.i, 1); markDirty(); break;
     case 'price-up': var pi = +t.dataset.i; if (pi > 0){ var pp = draft.prices.splice(pi, 1)[0]; draft.prices.splice(pi-1, 0, pp); markDirty(); } break;
     case 'show-privacy': doc.ret = t; doc.open = 'privacy'; renderDoc(); break;
@@ -1807,7 +1945,7 @@ window.__previewSkin = function(k){ if (!SKINS[k]) return; draft.theme = skinThe
 render();
 function handleHash(){
   var hs = location.hash || '';
-  if (hs === '#prices'){ doc.open = 'prices'; doc.ret = null; renderDoc(); return; }
+  if (hs === '#prices'){ track('prices', 'צפייה במחירון'); doc.open = 'prices'; doc.ret = null; renderDoc(); return; }
   var m = hs.match(/[#&]w=([^&]+)(?:&i=(\d+))?/);
   if (!m) return;
   var w = draft.works.filter(function(x){ return x.id === decodeURIComponent(m[1]) && x.visible && x.images.length; })[0];
@@ -1817,12 +1955,12 @@ function handleHash(){
 }
 window.addEventListener('hashchange', function(){ if (loaded) handleHash(); });
 if (cfg && cfg.token){
-  loadFromGitHub().then(function(){ render(); handleHash(); }, function(e){
+  loadFromGitHub().then(function(){ render(); handleHash(); setupTracking(); }, function(e){
     toast(ghError(e), 6000);
-    return loadPublic().then(function(){ render(); if (wantEdit) openLogin(); else handleHash(); });
+    return loadPublic().then(function(){ render(); if (wantEdit) openLogin(); else handleHash(); setupTracking(); });
   });
 } else {
-  loadPublic().then(function(){ render(); if (wantEdit) openLogin(); else handleHash(); });
+  loadPublic().then(function(){ render(); if (wantEdit) openLogin(); else handleHash(); setupTracking(); });
 }
 })();
 </script>
