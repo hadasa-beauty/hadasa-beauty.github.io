@@ -9,7 +9,6 @@
 <meta property="og:title" content="הדסה איפור ותסרוקות ערב">
 <meta property="og:description" content="תסרוקות ערב ואיפור לנשים ולנערות">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hadasa-beauty.github.io/images/p74gmzwrjx-t.jpg">
 <!--/og-->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -624,6 +623,7 @@ html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;trans
 .draft-bar{gap:10px}
 .docpage ul{padding-right:20px}
 .lb-slide img{backface-visibility:hidden;transform:translateZ(0)}
+.secret{-webkit-text-security:disc}
 </style>
 </head>
 <body>
@@ -1440,6 +1440,7 @@ function pendingChanges(){
   var chg = D.works.filter(function(w){ return sm[w.id] && JSON.stringify(sm[w.id]) !== JSON.stringify(w); }).length;
   var ord = S.works.map(function(w){ return w.id; }).filter(function(id){ return dm[id]; }).join() !== D.works.map(function(w){ return w.id; }).filter(function(id){ return sm[id]; }).join();
   if (add) out.push('נוספו ' + plural(add)); if (del) out.push('נמחקו ' + plural(del)); if (chg) out.push('נערכו ' + plural(chg)); if (ord && !chg) out.push('שינוי בסדר העבודות');
+  if (!out.length && !sameAsSaved()) out.push('שינוי קטן בהגדרות');
   if (needPages) out.push('יצירת מספרי עבודות וקישורים לתמונות (נדרש פעם אחת אחרי עדכון האתר)');
   return out;
 }
@@ -1463,7 +1464,10 @@ function renderOwnerChrome(){
   document.getElementById('admin-pill').hidden = !canEdit || ed.open;
   document.getElementById('draft-bar').hidden = !canEdit || !dirty;
 }
-function markDirty(){ ensureNumbers(draft.works); dirty = true; render(); if (ed.open) renderEditor(); }
+/* The banner reflects a real difference from what is published, not just "something was touched". */
+function sameAsSaved(){ return JSON.stringify(draft) === JSON.stringify(saved); }
+function recomputeDirty(){ dirty = needPages || !sameAsSaved(); return dirty; }
+function markDirty(){ ensureNumbers(draft.works); recomputeDirty(); render(); if (ed.open) renderEditor(); }
 
 /* ---------- login ---------- */
 function openLogin(){ ed.open = true; ed.login = true; renderEditor(); }
@@ -1594,11 +1598,11 @@ function bars(series){
 }
 function statsTab(){
   var s = draft.site, key = gcKey();
-  var setup = '<div class="field"><label for="s-gcCode">קוד האתר ב-GoatCounter</label><div class="cat-add" style="margin-top:0"><input id="s-gcCode" dir="ltr" data-site="gcCode" value="'+esc(s.gcCode)+'" placeholder="hadasa"><span class="hint" style="margin:0;align-self:center" dir="ltr">.goatcounter.com</span></div>' +
+  var setup = '<div class="field"><label for="s-gcCode">קוד האתר ב-GoatCounter</label><div class="cat-add" style="margin-top:0"><input id="s-gcCode" dir="ltr" autocomplete="off" data-site="gcCode" value="'+esc(s.gcCode)+'" placeholder="hadasa"><span class="hint" style="margin:0;align-self:center" dir="ltr">.goatcounter.com</span></div>' +
       '<span class="hint" style="margin:0">הקוד שבחרת בהרשמה. אחרי שממלאים אותו ומפרסמים, האתר מתחיל לספור.</span></div>' +
     '<div class="field"><span class="lbl">מפתח קריאת נתונים</span>' + (key
       ? '<div><button class="ic" data-act="gc-key-del">'+(ed.pending === 'gc-key-del' ? 'לחיצה נוספת להסרה' : 'הסרת המפתח מהמכשיר')+'</button></div>'
-      : '<div class="cat-add" style="margin-top:0"><label class="sr" for="gc-key">מפתח API</label><input id="gc-key" type="password" dir="ltr" autocomplete="off" placeholder="API key"><button class="btn sec" id="gc-key-save" type="button">שמירה</button></div>') +
+      : '<div class="cat-add" style="margin-top:0"><label class="sr" for="gc-key">מפתח API</label><input id="gc-key" type="text" class="secret" spellcheck="false" data-lpignore="true" data-1p-ignore dir="ltr" autocomplete="off" placeholder="API key"><button class="btn sec" id="gc-key-save" type="button">שמירה</button></div>') +
       '<span class="hint" style="margin:0">המפתח נשמר רק במכשיר הזה ומשמש רק להצגת הנתונים כאן.</span></div>';
   if (!s.gcCode) return '<p class="hint" style="margin-top:0">כדי לראות כמה נכנסו לאתר ואילו עבודות מעניינות, מחברים את האתר לשירות הסטטיסטיקה החינמי GoatCounter. הוא סופר ביקורים בלי עוגיות ובלי לזהות מבקרות, ולכן לא צריך באנר הסכמה. שלבי החיבור מפורטים במדריך.</p>' + setup;
   var gcLink = '<a class="btn sec" href="'+esc(gcBase())+'" target="_blank" rel="noopener" style="text-decoration:none;display:inline-block">לוח הבקרה המלא של GoatCounter</a>';
@@ -1669,7 +1673,7 @@ function designTab(){
 function siteTab(){
   var s = draft.site;
   function f(k, label, type, ph, hint){
-    return '<div class="field"><label for="s-'+k+'">'+label+'</label>' + (type === 'area' ? '<textarea id="s-'+k+'" data-site="'+k+'" placeholder="'+esc(ph||'')+'">'+esc(s[k])+'</textarea>' : '<input id="s-'+k+'" type="'+type+'" data-site="'+k+'" value="'+esc(s[k])+'" placeholder="'+esc(ph||'')+'">') + (hint ? '<span class="hint" style="margin:0">'+hint+'</span>' : '') + '</div>';
+    return '<div class="field"><label for="s-'+k+'">'+label+'</label>' + (type === 'area' ? '<textarea id="s-'+k+'" data-site="'+k+'" placeholder="'+esc(ph||'')+'">'+esc(s[k])+'</textarea>' : '<input id="s-'+k+'" type="'+type+'" autocomplete="off" data-site="'+k+'" value="'+esc(s[k])+'" placeholder="'+esc(ph||'')+'">') + (hint ? '<span class="hint" style="margin:0">'+hint+'</span>' : '') + '</div>';
   }
   return '<div class="field"><span class="lbl">לוגו</span><div class="logo-edit"><div class="prev">' + (s.logo ? '<img src="'+esc(src(s.logo))+'" alt="הלוגו הנוכחי">' : 'אין לוגו') + '</div>' +
       '<label class="btn sec" style="cursor:pointer">'+(s.logo?'החלפת הלוגו':'העלאת לוגו')+'<input type="file" accept="image/*" id="logofile" style="display:none"></label>' + (s.logo ? '<button class="ic" data-act="logo-del">הסרה</button>' : '') + '</div>' +
@@ -1693,7 +1697,7 @@ function siteTab(){
     '<hr style="border:0;border-top:1px solid var(--line);margin:22px 0">' +
     '<div class="field"><span class="lbl">זיהוי אוטומטי של עבודות</span>' +
       (aiKey() ? '<p class="hint" style="margin:0 0 8px">מופעל במכשיר הזה. בהעלאה מהירה, Claude מציע לכל תמונה קטגוריה, סוג, שם ומילות חיפוש.</p><div><button class="ic" data-act="ai-off">'+(ed.pending==='ai-off'?'לחיצה נוספת לכיבוי':'כיבוי במכשיר הזה')+'</button></div>'
-               : '<p class="hint" style="margin:0 0 8px">מדביקים כאן מפתח API של Claude. המפתח נשמר רק במכשיר הזה ולא מופיע באתר. העלות היא שבריר סנט לתמונה.</p><div class="cat-add" style="margin-top:0"><label class="sr" for="ai-key">מפתח API</label><input id="ai-key" type="password" dir="ltr" placeholder="sk-ant-..." autocomplete="off"><button class="btn sec" id="ai-key-save" type="button">הפעלה</button></div>') +
+               : '<p class="hint" style="margin:0 0 8px">מדביקים כאן מפתח API של Claude. המפתח נשמר רק במכשיר הזה ולא מופיע באתר. העלות היא שבריר סנט לתמונה.</p><div class="cat-add" style="margin-top:0"><label class="sr" for="ai-key">מפתח API</label><input id="ai-key" type="text" class="secret" spellcheck="false" data-lpignore="true" data-1p-ignore dir="ltr" placeholder="sk-ant-..." autocomplete="off"><button class="btn sec" id="ai-key-save" type="button">הפעלה</button></div>') +
     '</div>' +
     '<hr style="border:0;border-top:1px solid var(--line);margin:22px 0"><button class="btn danger" data-act="logout">ניתוק המכשיר הזה מהעריכה</button>';
 }
@@ -1714,7 +1718,7 @@ function workForm(){
     (F.isNew ? '' : '<button class="btn danger" data-act="w-del" data-id="'+F.id+'" style="margin-top:10px">'+delLabel('w-del'+F.id,'מחיקת העבודה')+'</button>');
 }
 function bindEditorInputs(box){
-  box.querySelectorAll('[data-site]').forEach(function(el){ el.addEventListener('change', function(){ draft.site[el.dataset.site] = el.value.trim(); markDirty(); }); });
+  box.querySelectorAll('[data-site]').forEach(function(el){ el.addEventListener('change', function(){ var v = el.value.trim(); if ((draft.site[el.dataset.site] || '') === v) return; draft.site[el.dataset.site] = v; markDirty(); }); });
   box.querySelectorAll('[data-catname]').forEach(function(el){
     el.addEventListener('change', function(){ var c = draft.categories.filter(function(c){return c.id===el.dataset.catname;})[0]; if (c && el.value.trim()){ c.name = el.value.trim(); markDirty(); } else if (c) el.value = c.name; });
   });
@@ -1725,8 +1729,10 @@ function bindEditorInputs(box){
   box.querySelectorAll('[data-bulk]').forEach(function(el){ el.addEventListener('change', function(){ ed[el.dataset.bulk] = el.value; }); });
   box.querySelectorAll('[data-theme-opt]').forEach(function(el){ el.addEventListener('change', function(){ draft.theme[el.dataset.themeOpt] = el.value; markDirty(); }); });
   box.querySelectorAll('[data-theme-color]').forEach(function(el){
-    el.addEventListener('input', function(){ draft.theme[el.dataset.themeColor] = el.value; applyTheme(draft.theme); });
-    el.addEventListener('change', function(){ draft.theme[el.dataset.themeColor] = el.value; markDirty(); });
+    function val(){ var k = el.dataset.themeColor, v = el.value.toLowerCase(), cur = (draft.theme[k] || lightVars(draft.theme)[k] || '').toLowerCase(), def = (lightVars(Object.assign({}, draft.theme, {accent:'', bg:'', ink:''}))[k] || '').toLowerCase();
+      return {k:k, v: v === def ? '' : v, same: v === cur}; }
+    el.addEventListener('input', function(){ var r = val(); if (r.same) return; draft.theme[r.k] = r.v; applyTheme(draft.theme); });
+    el.addEventListener('change', function(){ var r = val(); if (r.same && (draft.theme[r.k] || '') === (saved.theme[r.k] || '')) return; draft.theme[r.k] = r.v; markDirty(); });
   });
   var gk = box.querySelector('#gc-key-save'); if (gk) gk.addEventListener('click', function(){ var v = box.querySelector('#gc-key').value.trim(); if (!v) return; try { localStorage.setItem(GC_KEY, v); } catch(e){} ST.data = null; ST.err = ''; renderEditor(); });
   var bh = box.querySelector('#bulkhide'); if (bh) bh.addEventListener('change', function(){ ed.bulkHide = bh.checked; });
