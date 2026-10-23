@@ -479,7 +479,7 @@ html.mv-paused .mv-bars i.on b{width:100%;animation:none}
 [data-skin="motion"] .card .t{font-family:var(--display);font-weight:400;font-size:1.125rem}
 html.reveal-on[data-skin="motion"] .grid .card{opacity:0;transform:translateY(34px) scale(.97);transition:opacity .7s ease var(--d,0ms),transform .8s cubic-bezier(.2,.7,.2,1) var(--d,0ms)}
 html.reveal-on[data-skin="motion"] .grid .card.in{opacity:1;transform:none}
-[data-skin="motion"] .lb{animation:mvlb .35s ease}
+
 @keyframes mvlb{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){.mv-track{animation:none;flex-wrap:wrap;width:auto;padding-inline:20px}.mv-chip[aria-hidden="true"]{display:none}}
 html.a11y-still .mv-track{flex-wrap:wrap;width:auto;padding-inline:20px}html.a11y-still .mv-chip[aria-hidden="true"]{display:none}
@@ -622,6 +622,7 @@ html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;trans
 
 .draft-bar{gap:10px}
 .docpage ul{padding-right:20px}
+.lb-slide img{backface-visibility:hidden;transform:translateZ(0)}
 </style>
 </head>
 <body>
@@ -1319,6 +1320,7 @@ function renderLB(first){
   var f = focusAct && box.querySelector('[data-act="'+focusAct+'"]:not([disabled])');
   (f || box.querySelector('.lb-close')).focus({preventScroll:true});
   bindLBGestures(n);
+  w.images.forEach(function(im){ warm(src(im.full)); }); warmNeighbours();
 }
 function bindLBGestures(n){
   var st = document.getElementById('lbstage'), grab = document.querySelector('#lightbox .lb-grab'), g = null;
@@ -1374,7 +1376,7 @@ function goImg(idx, v){
   idx = Math.max(0, Math.min(n - 1, idx));
   if (TRACK.anim) TRACK.anim.stop();
   TRACK.anim = spring(TRACK.x, idx * W, v || 0, {damping: Math.abs(v || 0) > 300 ? 0.86 : 1, response:0.34}, function(x){ TRACK.x = x; applyTrack(); }, function(){
-    TRACK.anim = null; if (idx !== lb.img){ lb.img = idx; renderLB(); }
+    TRACK.anim = null; if (idx !== lb.img){ lb.img = idx; updateLBImg(); }
   });
 }
 function stepImg(d, spill){
@@ -1382,7 +1384,39 @@ function stepImg(d, spill){
   if (j >= 0 && j < n) return goImg(j, 0);
   if (spill) return stepWork(d);
 }
-function stepWork(d){ if (lb.list.length < 2) return; stopAnims(); lb.i = (lb.i + d + lb.list.length) % lb.list.length; lb.img = 0; renderLB(); }
+/* Changing image only updates the parts that depend on it; the photos stay mounted, so nothing reloads or flashes. */
+function updateLBImg(){
+  var box = document.getElementById('lightbox'), w = curWork(); if (!w || !box.querySelector('.lb')) return;
+  var n = w.images.length;
+  box.querySelectorAll('.lb-slide').forEach(function(s, i){
+    var on = i === lb.img; if (on) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true');
+    var im = s.querySelector('img'); if (im) im.alt = on ? altText(w) + (n > 1 ? ', תמונה ' + (i+1) + ' מתוך ' + n : '') : '';
+  });
+  box.querySelectorAll('.dots span').forEach(function(s, i){ s.className = i === lb.img ? 'on' : ''; });
+  var pv = box.querySelector('[data-act="img-prev"]'), nx = box.querySelector('[data-act="img-next"]');
+  if (pv) pv.disabled = lb.img === 0; if (nx) nx.disabled = lb.img === n - 1;
+  var a = box.querySelector('.lb-info a.cta'); if (a) a.href = waLink(askText(w, lb.img));
+  var fa = document.activeElement; if (fa && fa.disabled) (box.querySelector('[data-act="img-prev"]:not([disabled]),[data-act="img-next"]:not([disabled])') || box.querySelector('.lb-close')).focus({preventScroll:true});
+}
+var lbCache = {};
+function warm(url){
+  if (!url) return Promise.resolve();
+  if (!lbCache[url]){ var im = new Image(); im.decoding = 'async'; im.src = url; lbCache[url] = (im.decode ? im.decode() : Promise.resolve()).catch(function(){}); }
+  return lbCache[url];
+}
+function warmNeighbours(){
+  [-1, 1].forEach(function(d){
+    var id = lb.list[(lb.i + d + lb.list.length) % lb.list.length], w = draft.works.filter(function(x){ return x.id === id; })[0];
+    if (w && w.images[0]) warm(src(w.images[0].full));
+  });
+}
+function stepWork(d){
+  if (lb.list.length < 2) return; stopAnims();
+  var i = (lb.i + d + lb.list.length) % lb.list.length, w = draft.works.filter(function(x){ return x.id === lb.list[i]; })[0];
+  var done = false, go = function(){ if (done || !lb.open) return; done = true; lb.i = i; lb.img = 0; renderLB(); };
+  var t = setTimeout(go, 450);
+  Promise.all((w ? w.images : []).map(function(im){ return warm(src(im.full)); })).then(function(){ clearTimeout(t); go(); });
+}
 function closeLB(v){
   if (!lb.open || lb.closing) return;
   lb.closing = true; stopAnims();
