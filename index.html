@@ -4,14 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!--og-->
-<title>הדסה איפור ותסרוקות ערב | תסרוקות ערב ואיפור לנשים ולנערות</title>
-<link rel="canonical" href="https://hadasa-beauty.github.io/">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BeautySalon","name":"הדסה איפור ותסרוקות ערב","description":"תסרוקות ערב ואיפור לנשים ולנערות. גלריית עבודות ובדיקת תאריך פנוי בוואטסאפ.","url":"https://hadasa-beauty.github.io/","telephone":"+972-508645198","logo":"https://hadasa-beauty.github.io/images/logo-fi6g4s4ylj.png","image":["https://hadasa-beauty.github.io/images/hrmnxrcy6u.jpg","https://hadasa-beauty.github.io/images/p09vupadwg.jpg","https://hadasa-beauty.github.io/images/zvs8s9adwg.jpg","https://hadasa-beauty.github.io/images/ckmjuw60nz.jpg","https://hadasa-beauty.github.io/images/4vn1qu4j0j.jpg"],"sameAs":["https://www.instagram.com/hadasa_lan?stkn=YTVoZmFnOGhsZTR6"]}</script>
-<meta name="description" content="תסרוקות ערב ואיפור לנשים ולנערות. גלריית עבודות ובדיקת תאריך פנוי בוואטסאפ.">
+<title>הדסה איפור ותסרוקות ערב</title>
+<meta name="description" content="תסרוקות ערב ואיפור לנשים ולנערות">
 <meta property="og:title" content="הדסה איפור ותסרוקות ערב">
 <meta property="og:description" content="תסרוקות ערב ואיפור לנשים ולנערות">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hadasa-beauty.github.io/images/hrmnxrcy6u-t.jpg">
 <!--/og-->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -739,9 +736,7 @@ html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;trans
 </style>
 </head>
 <body>
-<div id="root"><!--static--><div class="seo-static"><h1>הדסה איפור ותסרוקות ערב</h1><p>תסרוקות ערב ואיפור לנשים ולנערות</p><ul><li><a href="c/cf24gksl12r.html">חצי אסוף</a></li><li><a href="c/cy65wsnldgu.html">קוקו גבוה</a></li><li><a href="c/cc3d451lqd1.html">צמת גומיות פתוחה</a></li><li><a href="c/chqg48amku0.html">אסוף גבוה</a></li><li><a href="c/cdlbrjzn5ow.html">איפור נערות</a></li></ul><h2>נעים להכיר</h2><p>ברוכות הבאות! 
-שמי הדסה. 
-אני מזמינה אותך לעולם שבו יופי פוגש מקצועיות וניסיון של שנים רבות. אני מתמחה בהתאמה מדויקת לכל בקשה וחלום, תוך יצירת הרגשה טובה וחיוניות שתישאר איתך לאורך כל האירוע. עם דגש מיוחד על הקשבה וחמימות לנערות וילדות, כל אחת זוכה אצלי ליחס אישי ולמראה מושלם שגורם לה להרגיש הכי טוב בעולם.</p></div><!--/static--></div>
+<div id="root"><!--static--><!--/static--></div>
 <script>(function(){
 'use strict';
 var CFG_KEY = 'gallery-gh-v1', AI_KEY = 'gallery-ai-v1', AUTO = '__auto';
@@ -909,7 +904,7 @@ function privacyPolicy(){
 }
 var doc = {open:null, ret:null};
 function priceList(){
-  var s = draft.site, wa = waLink('היי, ראיתי את המחירון בגלריה ויש לי שאלה:');
+  var s = draft.site, wa = waLink('היי 👋 ראיתי את המחירון בגלריה ויש לי שאלה:\n\n');
   return '<h2>מחירון</h2>' +
     (draft.prices.length ? draft.prices.map(function(p, i){
       return '<figure class="price-page"><img src="'+esc(src(p))+'" alt="'+esc('מחירון' + (draft.prices.length > 1 ? ', עמוד ' + (i+1) : '') + (s.priceText ? '. הנוסח המלא מופיע בגרסת הטקסט שמתחת.' : ''))+'">' +
@@ -975,10 +970,14 @@ function workLink(w, img){
   var base = siteBase(), n = (img || 0) + 1;
   return saved.pages.indexOf(w.id) !== -1 ? base + 'w/' + w.id + '-' + n + '.html' : base + '#w=' + w.id + '&i=' + n;
 }
+function waClean(s){ return String(s || '').replace(/[*_~`]/g, '').trim(); }
 function askText(w, img){
-  return 'היי, אשמח לפרטים על העבודה הזו מהגלריה:\n' +
-    [workNo(w), catName(w.cat), w.title || TYPE_LABEL[w.type]].filter(Boolean).join(' · ') +
-    (w.images.length > 1 ? ' (תמונה ' + ((img||0)+1) + ' מתוך ' + w.images.length + ')' : '') + '\n' + workLink(w, img);
+  var n = w.images.length;
+  return ['היי 👋 ראיתי בגלריה עבודה שאהבתי ואשמח לפרטים:', '',
+    (w.no ? '🖼️ *עבודה מס׳ ' + w.no + '*' : '🖼️ *' + waClean(w.title || TYPE_LABEL[w.type]) + '*'),
+    (w.no && w.title ? '✨ ' + waClean(w.title) : ''),
+    '📂 ' + [catName(w.cat), TYPE_LABEL[w.type]].filter(Boolean).map(waClean).join(' · ') + (n > 1 ? ' · תמונה ' + ((img||0)+1) + ' מתוך ' + n : ''),
+    '', '🔗 ' + workLink(w, img)].filter(function(x, i, a){ return x !== '' || (a[i-1] !== '' && i > 0); }).join('\n');
 }
 
 var needPages = false, lastErr = '';
@@ -1266,7 +1265,7 @@ function bookHTML(s, wa){
     '<p class="hint" style="margin:0 0 16px">ממלאים כמה פרטים, ונפתח וואטסאפ עם הודעה מוכנה. '+esc(draft.booking.note || '')+'</p>' +
     '<form id="book-form" novalidate><div class="bf-grid">' +
       '<div class="field"><label for="bf-date">תאריך האירוע *</label><input type="date" id="bf-date" min="'+today+'" required aria-describedby="bf-err"></div>' +
-      '<div class="field"><label for="bf-time">שעת האירוע</label><input type="time" id="bf-time"></div>' +
+      '<div class="field"><label for="bf-time">מוכנים בשעה</label><input type="time" id="bf-time"></div>' +
       (types.length ? '<div class="field"><label for="bf-type">סוג האירוע</label><select id="bf-type"><option value="">בחירה</option>' + types.map(function(t){ return '<option>'+esc(t)+'</option>'; }).join('') + '</select></div>' : '') +
       '<div class="field"><label for="bf-count">כמה מתארגנות</label><input type="number" id="bf-count" min="1" max="30" inputmode="numeric" value="1"></div>' +
       '<div class="field bf-wide"><span class="lbl" id="bf-svc-l">מה צריך</span><div class="radios" role="radiogroup" aria-labelledby="bf-svc-l">' +
@@ -1294,11 +1293,14 @@ function submitBooking(){
   var dt = new Date(date + 'T12:00:00'), day = dt.toLocaleDateString('he-IL', {weekday:'long'});
   var svc = (document.querySelector('input[name="bf-svc"]:checked') || {}).value || '';
   var pk = draft.packages.filter(function(x){ return x.id === g('bf-pkg'); })[0];
-  var lines = ['היי, אשמח לבדוק תאריך פנוי:',
-    'תאריך: ' + dt.getDate() + '.' + (dt.getMonth()+1) + '.' + dt.getFullYear() + ' (' + day + ')',
-    g('bf-time') ? 'שעת האירוע: ' + g('bf-time') : '', g('bf-type') ? 'אירוע: ' + g('bf-type') : '', svc ? 'שירות: ' + svc : '',
-    g('bf-count') ? 'מספר מתארגנות: ' + g('bf-count') : '', g('bf-place') ? 'מיקום: ' + g('bf-place') : '', pk ? 'חבילה: ' + pk.name : '',
-    g('bf-name') ? 'שם: ' + g('bf-name') : '', g('bf-notes') ? 'הערות: ' + g('bf-notes') : ''].filter(Boolean);
+  var row = function(icon, label, val){ return val ? icon + ' *' + label + ':* ' + waClean(val) : ''; };
+  var dateTxt = dt.getDate() + '.' + (dt.getMonth()+1) + '.' + dt.getFullYear() + ' (' + day + ')';
+  var lines = ['היי 👋 אשמח לבדוק אם התאריך שלי פנוי', '',
+    row('📅', 'תאריך', dateTxt), row('⏰', 'מוכנים בשעה', g('bf-time')), row('🎉', 'אירוע', g('bf-type')),
+    row('💄', 'שירות', svc), row('👥', 'מספר מתארגנות', g('bf-count')), row('📍', 'מיקום', g('bf-place')),
+    row('🎁', 'חבילה', pk ? pk.name : ''), row('🙋‍♀️', 'שם', g('bf-name'))].filter(function(x, i){ return x || i === 1; });
+  if (g('bf-notes')) lines.push('', '📝 *הערות:*', waClean(g('bf-notes')));
+  lines.push('', '_נשלח מהגלריה_');
   track('book', 'בקשת תאריך');
   window.open(waLink(lines.join('\n')), '_blank', 'noopener');
 }
