@@ -9,7 +9,6 @@
 <meta property="og:title" content="הדסה איפור ותסרוקות ערב">
 <meta property="og:description" content="תסרוקות ערב ואיפור לנשים ולנערות">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://hadasa-beauty.github.io/images/hrmnxrcy6u-t.jpg">
 <!--/og-->
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%92%84%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -670,10 +669,74 @@ html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;trans
 [data-skin="motion"] .am-photo img{border-radius:28px;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
 [data-skin="motion"] .about-me:hover .am-photo img{transform:scale(1.04)}
 @media (prefers-reduced-motion:reduce){[data-skin="motion"] .about-me:hover .am-photo img{transform:none}}
+
+/* ===== shared section heading ===== */
+.sec-h{font-family:var(--display);font-weight:400;font-size:clamp(1.9rem,4.6vw,3rem);line-height:1.05;letter-spacing:-.015em;margin:0 0 20px}
+.quotes,.pkgs,.book,.faq{margin:12px 0 56px;padding-top:32px;border-top:1px solid var(--line);scroll-margin-top:24px}
+.quotes:focus,.pkgs:focus,.book:focus,.faq:focus{outline:none}
+/* testimonials */
+.q-row{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.q-card{margin:0;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.q-card blockquote{margin:0;font-size:1.0625rem;line-height:1.55;position:relative;padding-top:18px}
+.q-card blockquote::before{content:"”";position:absolute;top:-14px;right:-2px;font-family:Georgia,serif;font-size:3.4rem;line-height:1;color:var(--accent);opacity:.5}
+.q-card figcaption{display:flex;align-items:center;gap:12px}
+.q-thumb{flex:none;width:52px;height:52px;border-radius:50%;overflow:hidden;border:0;padding:0;background:var(--blush)}
+.q-thumb img{width:100%;height:100%;object-fit:cover}
+.q-card strong{display:block}.q-card small{color:var(--muted);font-size:.875rem}
+/* packages */
+.pkg-row{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}
+.pkg{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;display:flex;flex-direction:column;gap:10px}
+.pkg h3{margin:0;font-size:1.25rem}
+.pkg-price{margin:0;font-family:var(--display);font-size:2.25rem;line-height:1;color:var(--accent);font-variant-numeric:tabular-nums}
+.pkg-price small{font-family:var(--body);font-size:.875rem;color:var(--muted);margin-inline-end:6px;vertical-align:middle}
+.pkg ul{list-style:none;margin:4px 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.pkg li::before{content:"✓";color:var(--accent);font-weight:700;margin-inline-end:8px}
+.pkg-note{margin:0;color:var(--muted);font-size:.9375rem}
+.pkg .cta{margin-top:auto;align-self:flex-start}
+.pkg-more{margin:14px 0 0}
+/* booking form */
+.book-card{background:var(--surface);border:1px solid var(--line);border-radius:26px;padding:24px 20px}
+@media (min-width:700px){.book-card{padding:34px}}
+.bf-grid{display:grid;gap:4px 16px;grid-template-columns:1fr 1fr}
+.bf-grid .bf-wide{grid-column:1/-1}
+@media (max-width:520px){.bf-grid{grid-template-columns:1fr}}
+.book .field input,.book .field select,.book .field textarea{border:1px solid var(--line);background:var(--bg);border-radius:12px;padding:11px 12px;width:100%;font-size:1rem;min-height:46px}
+.book .field input:focus,.book .field select:focus,.book .field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 18%,transparent)}
+.bf-err{color:#B3261E;font-weight:600;min-height:1.4em;margin:2px 0 10px}
+.book form .cta{font-size:1.0625rem;padding:14px 26px}
+/* faq */
+.faq-item{border-bottom:1px solid var(--line)}
+.faq-item summary{cursor:pointer;list-style:none;padding:16px 0;font-weight:600;font-size:1.0625rem;display:flex;justify-content:space-between;gap:12px}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary::after{content:"+";font-size:1.5rem;line-height:1;color:var(--accent);transition:transform .25s}
+.faq-item[open] summary::after{transform:rotate(45deg)}
+.faq-item div{padding:0 0 16px;color:var(--ink);max-width:70ch}
+/* viewer additions */
+.lb-quote{margin:4px 0;padding:12px 16px;border-inline-start:3px solid var(--accent);background:var(--surface);border-radius:10px;font-size:1rem}
+.lb-quote cite{display:block;margin-top:6px;font-style:normal;color:var(--muted);font-size:.875rem}
+.lb-ba-btn{position:absolute;bottom:14px;left:50%;translate:-50% 0;z-index:3;border:0;border-radius:999px;padding:8px 16px;font-weight:600;background:color-mix(in srgb,var(--surface) 82%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);color:var(--ink)}
+.lb-ba-btn[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.ba{position:absolute;inset:0;z-index:2;background:var(--blush);display:grid;place-items:center;padding:52px 14px 60px;--p:50%}
+.ba>img,.ba-before img{max-width:100%;max-height:100%;object-fit:contain;border-radius:12px}
+.ba-before{position:absolute;inset:52px 14px 60px;display:grid;place-items:center;clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.ba-line{position:absolute;top:52px;bottom:60px;left:calc(14px + (100% - 28px) * var(--p) / 100%);width:2px;background:#fff;box-shadow:0 0 0 1px rgba(0,0,0,.2);pointer-events:none}
+.ba-l{position:absolute;top:60px;z-index:1;background:rgba(0,0,0,.55);color:#fff;font-size:.8125rem;border-radius:999px;padding:2px 10px}
+.ba-l1{left:22px}.ba-l2{right:22px}
+.ba input[type=range]{position:absolute;inset:52px 14px 60px;width:calc(100% - 28px);height:calc(100% - 112px);opacity:0;cursor:ew-resize;margin:0;touch-action:none}
+.ba input[type=range]:focus-visible + *, .ba:focus-within .ba-line{background:var(--accent)}
+.ba-badge{position:absolute;top:8px;right:8px;background:var(--accent);color:var(--accent-ink);font-size:.75rem;font-weight:600;padding:2px 9px;border-radius:999px}
+/* editor */
+.pk-edit{display:flex;flex-direction:column;gap:8px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px}
+.pk-edit label{display:flex;flex-direction:column;gap:4px;font-weight:600;font-size:.875rem}
+.pk-edit input[type=text],.pk-edit textarea{border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 11px;font-weight:400;font-size:1rem}
+.pk-grid{display:grid;gap:8px 12px;grid-template-columns:1fr 1fr}
+.pk-grid .pk-wide{grid-column:1/-1}
+.pk-edit .acts{display:flex;gap:6px}
+.seo-static{max-width:900px;margin:40px auto;padding:0 20px}
 </style>
 </head>
 <body>
-<div id="root"></div>
+<div id="root"><!--static--><!--/static--></div>
 <script>(function(){
 'use strict';
 var CFG_KEY = 'gallery-gh-v1', AI_KEY = 'gallery-ai-v1', AUTO = '__auto';
@@ -685,10 +748,11 @@ function esc(s){ return String(s == null ? '' : s).replace(/[&<>"']/g, function(
 
 var DEFAULTS = {
   v:2,
-  site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', ownerPhoto:'', aboutTitle:'', ownerName:'', aboutText:'', aboutPoints:'', priceText:'', gcCode:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
+  site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', ownerPhoto:'', aboutTitle:'', ownerName:'', aboutText:'', aboutPoints:'', priceText:'', serviceAreas:'', gcCode:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
   categories:[{id:'c1',name:'כלות'},{id:'c2',name:'ערב ואירועים'},{id:'c3',name:'בת מצווה'}],
-  works:[]
+  works:[], packages:[], faq:[], booking:{on:true, note:''}, catPages:[]
 };
+var FAQ_SUGGEST = ['האם יש ניסיון לפני האירוע?', 'האם את מגיעה עד הבית או לאולם?', 'כמה זמן לוקחת תסרוקת או איפור?', 'כמה זמן מראש כדאי להזמין?', 'איך שומרים תאריך ומה מדיניות הביטול?', 'אפשר להגיע עם תמונת השראה?', 'האם את עובדת גם עם מלוות (אמא, אחיות, חברות)?'];
 /* ---------- theme ---------- */
 var PRESETS = {
   powder:{name:'ורוד פודרה', light:{bg:'#F8F2F3',surface:'#FFFFFF',ink:'#2B1726',muted:'#7A6372',accent:'#8C2752',blush:'#EED9DF',gold:'#BF9B6F',line:'#E6D3D9'},
@@ -879,16 +943,20 @@ function trapFocus(e){
 function normImg(i){ return typeof i === 'string' ? {full:i, thumb:i} : (i && i.full ? {full:i.full, thumb:i.thumb || i.full} : null); }
 function normalize(d){
   var o = clone(DEFAULTS);
-  o.theme = normTheme(d && d.theme); o.prices = []; o.pages = [];
+  o.theme = normTheme(d && d.theme); o.prices = []; o.pages = []; o.packages = []; o.faq = []; o.booking = {on:true, note:''}; o.catPages = [];
   if (!d || !d.site) return o;
   for (var k in o.site) if (typeof d.site[k] === 'string') o.site[k] = d.site[k];
   if (Array.isArray(d.categories)) o.categories = d.categories.filter(function(c){return c && c.id;});
   o.works = Array.isArray(d.works) ? d.works.filter(function(w){return w && w.id;}).map(function(w){
     return { id:w.id, title:w.title||'', cat:w.cat||'', type:TYPE_LABEL[w.type]?w.type:'hair',
       tags:Array.isArray(w.tags)?w.tags:[], desc:w.desc||'', images:(Array.isArray(w.images)?w.images:[]).map(normImg).filter(Boolean),
-      visible:w.visible!==false, featured:!!w.featured, review:!!w.review, no:+w.no || 0 };
+      visible:w.visible!==false, featured:!!w.featured, review:!!w.review, no:+w.no || 0, quote:typeof w.quote === 'string' ? w.quote : '', quoteName:typeof w.quoteName === 'string' ? w.quoteName : '', before:w.before ? normImg(w.before) : null };
   }) : [];
   o.prices = Array.isArray(d.prices) ? d.prices.filter(function(x){ return typeof x === 'string' && x; }) : [];
+  o.packages = Array.isArray(d.packages) ? d.packages.filter(function(x){ return x && x.id; }).map(function(x){ return {id:x.id, name:x.name||'', price:x.price||'', from:!!x.from, items:x.items||'', note:x.note||''}; }) : [];
+  o.faq = Array.isArray(d.faq) ? d.faq.filter(function(x){ return x && x.id; }).map(function(x){ return {id:x.id, q:x.q||'', a:x.a||''}; }) : [];
+  o.booking = {on: !(d.booking && d.booking.on === false), note: (d.booking && typeof d.booking.note === 'string') ? d.booking.note : ''};
+  o.catPages = Array.isArray(d.catPages) ? d.catPages.filter(function(x){ return typeof x === 'string'; }) : [];
   o.pages = Array.isArray(d.pages) ? d.pages.filter(function(x){ return typeof x === 'string'; }) : [];
   ensureNumbers(o.works);
   return o;
@@ -931,6 +999,8 @@ function loadCfg(){ try { return JSON.parse(localStorage.getItem(CFG_KEY) || 'nu
 function saveCfg(c){ try { localStorage.setItem(CFG_KEY, JSON.stringify(c)); } catch(e){} }
 var cfg = loadCfg();
 function siteBase(){
+  /* own domain (e.g. after connecting a .co.il): links, sitemap and previews use it */
+  if (location.protocol === 'https:' && !/github\.io$/i.test(location.hostname) && /\./.test(location.hostname) && !/claude|localhost/i.test(location.hostname)) return location.origin + '/';
   if (!cfg) return location.href.split(/[?#]/)[0].replace(/[^/]*$/, '');
   var root = cfg.owner.toLowerCase() + '.github.io';
   return 'https://' + root + '/' + (cfg.repo.toLowerCase() === root ? '' : cfg.repo + '/');
@@ -1096,7 +1166,7 @@ function heroHTML(skin, s, vis, wa){
   function logo(cls){ return s.logo && cls === 'nt-logo' ? '<img class="'+cls+'" src="'+esc(src(s.logo))+'" alt="'+esc(s.name)+'">' : ''; }
   var title = (skin !== 'night' || !s.logo || s.showName ? '<h1>'+esc(s.name)+'</h1>' : '<h1 class="sr">'+esc(s.name)+'</h1>');
   var tag = s.tagline ? '<p class="tagline">'+esc(s.tagline)+'</p>' : '', about = s.about ? '<p class="about">'+esc(s.about)+'</p>' : '';
-  var ctas = '<div class="ctas">' + (wa ? '<a class="cta" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'לתיאום מועד בוואטסאפ</a>' : '') +
+  var ctas = '<div class="ctas">' + (wa && draft.booking.on ? '<a class="cta" href="#book">'+ICON_CAL+'בדיקת תאריך פנוי</a>' : wa ? '<a class="cta" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'לתיאום מועד בוואטסאפ</a>' : '') +
     (draft.prices.length ? '<button class="cta ghost" data-act="show-prices">'+ICON_PRICE+'מחירון</button>' : vis.length ? '<a class="cta ghost" href="#works">לכל העבודות</a>' : '') +
     (hasAbout(s) ? '<a class="cta ghost am-link" href="#about">קצת עליי</a>' : '') + '</div>';
   function shot(w, cls, full, inner){
@@ -1146,7 +1216,7 @@ function heroHTML(skin, s, vis, wa){
         '<div class="ct-shade"></div><div class="ct-title"><h1>'+esc(s.name)+'</h1></div></div>' +
       '<div class="ct-profile">' +
         '<div class="ct-meta"><strong>'+esc(s.tagline)+'</strong>' + (s.about ? '<span>'+esc(s.about)+'</span>' : '') + '</div></div>' +
-      '<div class="ct-actions">' + (wa ? '<a class="ct-act" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'<span>הודעה</span></a>' : '') +
+      '<div class="ct-actions">' + (wa && draft.booking.on ? '<a class="ct-act" href="#book">'+ICON_CAL+'<span>תאריך פנוי</span></a>' : '') + (wa ? '<a class="ct-act" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'<span>הודעה</span></a>' : '') +
         (s.phone ? '<a class="ct-act" href="tel:'+esc(s.phone.replace(/[^\d+]/g,''))+'"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>חיוג</span></a>' : '') +
         (s.instagram ? '<a class="ct-act" href="'+esc(s.instagram)+'" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg><span>אינסטגרם</span></a>' : '') +
         (hasAbout(s) ? '<a class="ct-act" href="#about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>קצת עליי</span></a>' : '') +
@@ -1161,6 +1231,76 @@ function heroHTML(skin, s, vis, wa){
   }
   return '<header class="hero"><div>' + logo('hero-logo') + title + tag + about + ctas + '</div><div class="arches">' +
     [0,1,2].map(function(i){ var w = pick[i]; return w ? '<button class="arch" data-open="'+w.id+'" aria-label="'+esc(altText(w))+'"><div class="in"><img src="'+esc(src(w.images[0].thumb))+'" alt=""></div></button>' : '<div class="arch empty" aria-hidden="true"><div class="in"></div></div>'; }).join('') + '</div></header>';
+}
+function areas(){ return (draft.site.serviceAreas || '').split(/[,،\n]/).map(function(x){ return x.trim(); }).filter(Boolean); }
+function faqItems(){ return draft.faq.filter(function(x){ return x.q.trim() && x.a.trim(); }); }
+function quotesHTML(){
+  var q = visibleWorks().filter(function(w){ return (w.quote || '').trim(); }).slice(0, 8);
+  if (!q.length) return '';
+  return '<section class="quotes" id="reviews" tabindex="-1" aria-labelledby="reviews-h"><p class="am-kicker">לקוחות מספרות</p><h2 id="reviews-h" class="sec-h">מה אומרות הלקוחות</h2><div class="q-row">' +
+    q.map(function(w){ return '<figure class="q-card"><blockquote>'+esc(w.quote)+'</blockquote><figcaption>' +
+      '<button class="q-thumb" data-open="'+w.id+'" aria-label="'+esc('לעבודה: ' + altText(w))+'"><img src="'+esc(src(w.images[0].thumb))+'" alt="" loading="lazy"></button>' +
+      '<span><strong>'+esc(w.quoteName || 'לקוחה')+'</strong><small>'+esc(catName(w.cat) || TYPE_LABEL[w.type])+'</small></span></figcaption></figure>'; }).join('') + '</div></section>';
+}
+function pkgHTML(){
+  var P = draft.packages.filter(function(x){ return x.name.trim(); });
+  if (!P.length) return '';
+  return '<section class="pkgs" id="packages" tabindex="-1" aria-labelledby="pkg-h"><p class="am-kicker">חבילות</p><h2 id="pkg-h" class="sec-h">מה אפשר להזמין</h2><div class="pkg-row">' +
+    P.map(function(x){
+      var items = x.items.split('\n').map(function(t){ return t.trim(); }).filter(Boolean);
+      return '<article class="pkg"><h3>'+esc(x.name)+'</h3>' + (x.price ? '<p class="pkg-price">'+(x.from ? '<small>החל מ-</small>' : '')+esc(x.price)+(/\d$/.test(x.price.trim()) ? ' ₪' : '')+'</p>' : '') +
+        (items.length ? '<ul>' + items.map(function(t){ return '<li>'+esc(t)+'</li>'; }).join('') + '</ul>' : '') + (x.note ? '<p class="pkg-note">'+esc(x.note)+'</p>' : '') +
+        (draft.booking.on && waNumber() ? '<button class="cta" data-act="pkg-book" data-k="'+x.id+'">'+ICON_CAL+'בדיקת תאריך לחבילה</button>' : '') + '</article>';
+    }).join('') + '</div>' + (draft.prices.length ? '<p class="pkg-more"><button class="linkbtn" data-act="show-prices">למחירון המלא</button></p>' : '') + '</section>';
+}
+function bookHTML(s, wa){
+  if (!draft.booking.on || !wa) return '';
+  var today = isoDay(new Date()), A = areas(), P = draft.packages.filter(function(x){ return x.name.trim(); });
+  var types = draft.categories.map(function(c){ return c.name; }).concat(['אחר']);
+  return '<section class="book" id="book" tabindex="-1" aria-labelledby="book-h"><div class="book-card"><p class="am-kicker">הזמנה</p><h2 id="book-h" class="sec-h">בדיקת תאריך פנוי</h2>' +
+    '<p class="hint" style="margin:0 0 16px">ממלאים כמה פרטים, ונפתח וואטסאפ עם הודעה מוכנה. '+esc(draft.booking.note || '')+'</p>' +
+    '<form id="book-form" novalidate><div class="bf-grid">' +
+      '<div class="field"><label for="bf-date">תאריך האירוע *</label><input type="date" id="bf-date" min="'+today+'" required aria-describedby="bf-err"></div>' +
+      '<div class="field"><label for="bf-time">שעת האירוע</label><input type="time" id="bf-time"></div>' +
+      '<div class="field"><label for="bf-type">סוג האירוע</label><select id="bf-type"><option value="">בחירה</option>' + types.map(function(t){ return '<option>'+esc(t)+'</option>'; }).join('') + '</select></div>' +
+      '<div class="field"><label for="bf-count">כמה מתארגנות</label><input type="number" id="bf-count" min="1" max="30" inputmode="numeric" value="1"></div>' +
+      '<div class="field bf-wide"><span class="lbl" id="bf-svc-l">מה צריך</span><div class="radios" role="radiogroup" aria-labelledby="bf-svc-l">' +
+        [['both','תסרוקת ואיפור'],['hair','תסרוקת'],['makeup','איפור']].map(function(o, i){ return '<label><input type="radio" name="bf-svc" value="'+o[1]+'"'+(i===0?' checked':'')+'>'+o[1]+'</label>'; }).join('') + '</div></div>' +
+      '<div class="field"><label for="bf-place">איפה מתארגנות</label><input type="text" id="bf-place" list="bf-areas" placeholder="עיר או יישוב"><datalist id="bf-areas">' + A.map(function(a){ return '<option value="'+esc(a)+'">'; }).join('') + '</datalist></div>' +
+      (P.length ? '<div class="field"><label for="bf-pkg">חבילה</label><select id="bf-pkg"><option value="">עוד לא החלטתי</option>' + P.map(function(x){ return '<option value="'+esc(x.id)+'"'+(ui.pkg===x.id?' selected':'')+'>'+esc(x.name)+'</option>'; }).join('') + '</select></div>' : '') +
+      '<div class="field"><label for="bf-name">שם</label><input type="text" id="bf-name" autocomplete="given-name"></div>' +
+      '<div class="field bf-wide"><label for="bf-notes">משהו נוסף? (לא חובה)</label><textarea id="bf-notes" rows="2" placeholder="למשל: שיער ארוך, רוצה לוק דומה לעבודה מס׳ 12"></textarea></div>' +
+    '</div><p class="bf-err" id="bf-err" role="alert"></p><button class="cta" type="submit">'+ICON_CHAT+'שליחה בוואטסאפ</button></form></div></section>';
+}
+function faqHTML(){
+  var F = faqItems(); if (!F.length) return '';
+  return '<section class="faq" id="faq" tabindex="-1" aria-labelledby="faq-h"><p class="am-kicker">שאלות ותשובות</p><h2 id="faq-h" class="sec-h">שאלות נפוצות</h2>' +
+    F.map(function(x){ return '<details class="faq-item"><summary>'+esc(x.q)+'</summary><div>'+esc(x.a).replace(/\n/g,'<br>')+'</div></details>'; }).join('') +
+    (waNumber() ? '<p class="hint">לא מצאת תשובה? <a href="'+esc(waLink('היי, יש לי שאלה:'))+'" target="_blank" rel="noopener">שאלי בוואטסאפ</a></p>' : '') + '</section>';
+}
+function submitBooking(){
+  var g = function(id){ var e = document.getElementById(id); return e ? e.value.trim() : ''; };
+  var err = document.getElementById('bf-err'), date = g('bf-date');
+  if (!date){ err.textContent = 'צריך לבחור את תאריך האירוע.'; document.getElementById('bf-date').focus(); return; }
+  if (date < isoDay(new Date())){ err.textContent = 'התאריך שנבחר כבר עבר.'; document.getElementById('bf-date').focus(); return; }
+  err.textContent = '';
+  var dt = new Date(date + 'T12:00:00'), day = dt.toLocaleDateString('he-IL', {weekday:'long'});
+  var svc = (document.querySelector('input[name="bf-svc"]:checked') || {}).value || '';
+  var pk = draft.packages.filter(function(x){ return x.id === g('bf-pkg'); })[0];
+  var lines = ['היי, אשמח לבדוק תאריך פנוי:',
+    'תאריך: ' + dt.getDate() + '.' + (dt.getMonth()+1) + '.' + dt.getFullYear() + ' (' + day + ')',
+    g('bf-time') ? 'שעת האירוע: ' + g('bf-time') : '', g('bf-type') ? 'אירוע: ' + g('bf-type') : '', svc ? 'שירות: ' + svc : '',
+    g('bf-count') ? 'מספר מתארגנות: ' + g('bf-count') : '', g('bf-place') ? 'מיקום: ' + g('bf-place') : '', pk ? 'חבילה: ' + pk.name : '',
+    g('bf-name') ? 'שם: ' + g('bf-name') : '', g('bf-notes') ? 'הערות: ' + g('bf-notes') : ''].filter(Boolean);
+  track('book', 'בקשת תאריך');
+  window.open(waLink(lines.join('\n')), '_blank', 'noopener');
+}
+function shareWork(){
+  var w = curWork(); if (!w) return;
+  var url = workLink(w, lb.img), text = 'ראיתי את הלוק הזה אצל ' + draft.site.name + ' – מה דעתך?';
+  track('share-' + w.no, 'שיתוף ' + workTitle(w));
+  if (navigator.share){ navigator.share({title:workTitle(w), text:text, url:url}).catch(function(){}); return; }
+  window.open('https://wa.me/?text=' + encodeURIComponent(text + '\n' + url), '_blank', 'noopener');
 }
 function hasAbout(s){ return !!((s.aboutText || '').trim() || s.ownerPhoto); }
 function aboutHTML(s, wa){
@@ -1180,6 +1320,8 @@ function altText(w){ return [w.title || TYPE_LABEL[w.type], catName(w.cat)].filt
 function plural(n){ return n === 1 ? 'עבודה אחת' : n + ' עבודות'; }
 var ICON_CHAT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 0 1-11.6 7.1L4 20l1.4-4.2A8 8 0 1 1 20 11.5z"/></svg>';
 var ICON_PRICE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L3 13V3h10l7.6 7.6a2 2 0 0 1 0 2.8z"/><circle cx="7.5" cy="7.5" r="1.5"/></svg>';
+var ICON_CAL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>';
+var ICON_SHARE = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12M7 8l5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>';
 var ICON_SEARCH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
 function toast(msg, ms){ var t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toast._t); toast._t = setTimeout(function(){ t.classList.remove('on'); }, ms || 3600); }
 function showBusy(msg){ var d = document.createElement('div'); d.className = 'busy'; d.textContent = msg; document.body.appendChild(d); return d; }
@@ -1206,10 +1348,10 @@ function render(){
           usedCats.map(function(c){ return '<button class="chip" data-cat="'+c.id+'" aria-pressed="'+(ui.cat===c.id)+'">'+esc(c.name)+'</button>'; }).join('') + '</div>' : '') +
         (hasHair && hasMk ? '<div class="seg" role="group" aria-label="סוג עבודה">' + [['all','הכל'],['hair','תסרוקות'],['makeup','איפור']].map(function(p){ return '<button data-type="'+p[0]+'" aria-pressed="'+(ui.type===p[0])+'">'+p[1]+'</button>'; }).join('') + '</div>' : '') +
       '</div></div>' +
-      '<p class="count" id="count" aria-live="polite"></p><div class="grid" id="grid"></div></section>' + aboutHTML(s, wa) + '</main>' +
+      '<p class="count" id="count" aria-live="polite"></p><div class="grid" id="grid"></div></section>' + quotesHTML() + aboutHTML(s, wa) + pkgHTML() + bookHTML(s, wa) + faqHTML() + '</main>' +
     '<footer class="foot"><div>' + (s.logo ? '<img class="foot-logo" src="'+esc(src(s.logo))+'" alt="">' : '') + '<strong>'+esc(s.name)+'</strong><div>'+esc(s.tagline)+'</div></div>' +
       '<div>' + (s.phone ? '<div>'+esc(s.phone)+'</div>' : '') + (s.instagram ? '<a href="'+esc(s.instagram)+'" target="_blank" rel="noopener">אינסטגרם</a>' : '') + '</div>' +
-      '<div class="legal">' + (hasAbout(s) ? '<a class="linkbtn" href="#about">קצת עליי</a>' : '') + (draft.prices.length ? '<button class="linkbtn" data-act="show-prices">מחירון</button>' : '') + '<button class="linkbtn" data-act="show-a11y">הצהרת נגישות</button><button class="linkbtn" data-act="show-privacy">מדיניות פרטיות</button></div></footer></div>' +
+      '<div class="legal">' + (wa && draft.booking.on ? '<a class="linkbtn" href="#book">בדיקת תאריך פנוי</a>' : '') + (faqItems().length ? '<a class="linkbtn" href="#faq">שאלות נפוצות</a>' : '') + (hasAbout(s) ? '<a class="linkbtn" href="#about">קצת עליי</a>' : '') + (draft.prices.length ? '<button class="linkbtn" data-act="show-prices">מחירון</button>' : '') + '<button class="linkbtn" data-act="show-a11y">הצהרת נגישות</button><button class="linkbtn" data-act="show-privacy">מדיניות פרטיות</button></div></footer></div>' +
   '<button class="a11y-btn" data-act="a11y-open" aria-label="הגדרות נגישות" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M12 2a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18v2z"/></svg></button>' +
   (wa ? '<a class="wa-float" href="'+esc(wa)+'" target="_blank" rel="noopener" aria-label="שליחת הודעה בוואטסאפ">'+ICON_CHAT+'</a>' : '');
   renderGrid(); renderOwnerChrome();
@@ -1231,7 +1373,7 @@ function renderGrid(){
   if (draft.theme.skin === 'catalog') return renderCatalog(grid, list, vis, count);
   grid.innerHTML = list.map(function(w, i){
     return '<button class="card" data-open="'+w.id+'"><div class="ph"><img src="'+esc(src(w.images[0].thumb))+'" alt="'+esc(altText(w))+'" loading="lazy">' +
-      (w.images.length > 1 ? '<span class="multi">'+w.images.length+' תמונות</span>' : '') + '</div>' +
+      (w.images.length > 1 ? '<span class="multi">'+w.images.length+' תמונות</span>' : '') + (w.before ? '<span class="ba-badge">לפני ואחרי</span>' : '') + '</div>' +
       '<div class="cap"><span class="no" aria-hidden="true">'+(i+1 < 10 ? '0' : '')+(i+1)+'</span><div class="t">'+esc(w.title || TYPE_LABEL[w.type])+'</div><div class="c">'+esc([catName(w.cat), TYPE_LABEL[w.type]].filter(Boolean).join(' / '))+'</div></div></button>';
   }).join('');
   if (draft.theme.skin === 'motion') setupReveal(); else document.documentElement.classList.remove('reveal-on');
@@ -1344,7 +1486,7 @@ function stageW(){ var st = document.getElementById('lbstage'); return st ? st.c
 function openLB(id, from){
   var list = filtered(); if (!list.some(function(w){return w.id===id;})) list = visibleWorks();
   lb.list = list.map(function(w){return w.id;}); lb.i = Math.max(0, lb.list.indexOf(id)); lb.img = 0; lb.ret = from || null;
-  var wasOpen = lb.open; lb.open = true; lb.closing = false; stopAnims();
+  var wasOpen = lb.open; lb.open = true; lb.closing = false; lb.ba = false; stopAnims();
   renderLB(true);
   var tw = curWork(); if (tw && !wasOpen) track('open-' + tw.no, 'פתיחת ' + workTitle(tw));
   if (wasOpen) return;
@@ -1368,14 +1510,20 @@ function renderLB(first){
   box.hidden = false; document.body.style.overflow = 'hidden';
   box.innerHTML = '<div class="lb-scrim" data-act="lb-close"></div><div class="lb" role="dialog" aria-modal="true" aria-label="'+esc(w.title||'עבודה')+'">' +
     '<div class="lb-grab" aria-hidden="true"></div><div class="lb-stage" id="lbstage"><button class="lb-close" data-act="lb-close" aria-label="סגירה">×</button>' +
+      (w.before ? '<button class="lb-ba-btn" data-act="ba-toggle" aria-pressed="'+!!lb.ba+'">'+(lb.ba ? 'חזרה לתמונות' : 'לפני ואחרי')+'</button>' : '') +
+      (w.before && lb.ba ? '<div class="ba" style="--p:50%"><img src="'+esc(src(w.images[0].full))+'" alt="'+esc('אחרי: ' + altText(w))+'" draggable="false"><div class="ba-before"><img src="'+esc(src(w.before.full))+'" alt="לפני" draggable="false"></div>' +
+        '<span class="ba-l ba-l1" aria-hidden="true">לפני</span><span class="ba-l ba-l2" aria-hidden="true">אחרי</span><i class="ba-line" aria-hidden="true"></i>' +
+        '<input type="range" dir="ltr" min="0" max="100" value="50" aria-label="השוואה בין לפני לאחרי" id="ba-range"></div>' : '') +
       '<div class="lb-track">' + w.images.map(function(im, i){
         return '<div class="lb-slide"'+(i!==lb.img?' aria-hidden="true"':'')+'><img src="'+esc(src(im.full))+'" alt="'+(i===lb.img?esc(altText(w) + (n > 1 ? ', תמונה ' + (i+1) + ' מתוך ' + n : '')):'')+'" draggable="false"></div>'; }).join('') + '</div>' +
       (n > 1 ? '<button class="lb-arrow prev" data-act="img-prev" aria-label="התמונה הקודמת"'+(lb.img===0?' disabled':'')+'>›</button><button class="lb-arrow next" data-act="img-next" aria-label="התמונה הבאה"'+(lb.img===n-1?' disabled':'')+'>‹</button><div class="dots">' + w.images.map(function(_,i){return '<span class="'+(i===lb.img?'on':'')+'"></span>';}).join('') + '</div>' : '') +
     '</div><div class="lb-info"><div class="meta">'+esc([catName(w.cat), TYPE_LABEL[w.type]].filter(Boolean).join(' / '))+(w.no ? '<span class="lb-no">'+esc(workNo(w))+'</span>' : '')+'</div>' +
       '<h2>'+esc(w.title || TYPE_LABEL[w.type])+'</h2>' + (w.desc ? '<p>'+esc(w.desc)+'</p>' : '') +
+      (w.quote ? '<blockquote class="lb-quote">'+esc(w.quote)+(w.quoteName ? '<cite>'+esc(w.quoteName)+'</cite>' : '')+'</blockquote>' : '') +
       (w.tags.length ? '<div class="tags">' + w.tags.map(function(t){return '<button class="tag" data-tag="'+esc(t)+'">'+esc(t)+'</button>';}).join('') + '</div>' : '') +
       (wa ? '<a class="cta" style="align-self:flex-start;margin-top:6px" href="'+esc(wa)+'" target="_blank" rel="noopener">'+ICON_CHAT+'אהבת? שלחי הודעה על הלוק הזה</a>' +
         '<p class="lb-hint">ההודעה תכלול את מספר העבודה וקישור לתמונה הזו.</p>' : '') +
+      '<button class="cta ghost" data-act="share-work" style="align-self:flex-start">'+ICON_SHARE+'שלחי לחברה</button>' +
       (draft.prices.length ? '<button class="linkbtn" data-act="show-prices" style="align-self:flex-start">לצפייה במחירון</button>' : '') +
       (lb.list.length > 1 ? '<div class="lb-nav"><button data-act="work-prev">› העבודה הקודמת</button><span style="color:var(--muted);align-self:center">'+(lb.i+1)+' מתוך '+lb.list.length+'</span><button data-act="work-next">העבודה הבאה ‹</button></div>' : '') +
     '</div></div>';
@@ -1383,12 +1531,13 @@ function renderLB(first){
   var f = focusAct && box.querySelector('[data-act="'+focusAct+'"]:not([disabled])');
   (f || box.querySelector('.lb-close')).focus({preventScroll:true});
   bindLBGestures(n);
+  var br = document.getElementById('ba-range'); if (br) br.addEventListener('input', function(){ br.parentNode.style.setProperty('--p', br.value + '%'); });
   w.images.forEach(function(im){ warm(src(im.full)); }); warmNeighbours();
 }
 function bindLBGestures(n){
   var st = document.getElementById('lbstage'), grab = document.querySelector('#lightbox .lb-grab'), g = null;
   function down(e){
-    if ((e.button && e.button > 0) || e.target.closest('button,a')) return;
+    if ((e.button && e.button > 0) || e.target.closest('button,a,.ba')) return;
     stopAnims();
     g = {x:e.clientX, y:e.clientY, id:e.pointerId, axis:e.currentTarget === grab ? 'y' : null, el:e.currentTarget, hist:[{t:e.timeStamp, x:e.clientX, y:e.clientY}], tx:TRACK.x, sy:SHEET.y};
     if (g.axis === 'y'){ if (!isSheet()){ g = null; return; } try { g.el.setPointerCapture(e.pointerId); } catch(_){} }
@@ -1476,7 +1625,7 @@ function warmNeighbours(){
 function stepWork(d){
   if (lb.list.length < 2) return; stopAnims();
   var i = (lb.i + d + lb.list.length) % lb.list.length, w = draft.works.filter(function(x){ return x.id === lb.list[i]; })[0];
-  var done = false, go = function(){ if (done || !lb.open) return; done = true; lb.i = i; lb.img = 0; renderLB(); };
+  var done = false, go = function(){ if (done || !lb.open) return; done = true; lb.i = i; lb.img = 0; lb.ba = false; renderLB(); };
   var t = setTimeout(go, 450);
   Promise.all((w ? w.images : []).map(function(im){ return warm(src(im.full)); })).then(function(){ clearTimeout(t); go(); });
 }
@@ -1491,11 +1640,14 @@ function closeLB(v){
 /* ---------- owner chrome ---------- */
 function pendingChanges(){
   var out = [], S = saved, D = draft;
-  var SITE = {name:'שם העסק', tagline:'שורת התיאור', about:'„כמה מילים עליי”', phone:'מספר הוואטסאפ', waMessage:'הודעת הוואטסאפ', instagram:'קישור האינסטגרם', logo:'הלוגו', cover:'תמונת השער', priceText:'נוסח המחירון', showName:'הצגת השם ליד הלוגו', gcCode:'קוד הסטטיסטיקה', a11yName:'רכז/ת הנגישות', a11yPhone:'טלפון לפניות נגישות', a11yEmail:'דוא"ל לפניות נגישות', ownerPhoto:'התמונה ב„קצת עליי”', aboutTitle:'הכותרת ב„קצת עליי”', ownerName:'השם ב„קצת עליי”', aboutText:'הטקסט ב„קצת עליי”', aboutPoints:'הנקודות ב„קצת עליי”'};
+  var SITE = {name:'שם העסק', tagline:'שורת התיאור', about:'„כמה מילים עליי”', phone:'מספר הוואטסאפ', waMessage:'הודעת הוואטסאפ', instagram:'קישור האינסטגרם', logo:'הלוגו', cover:'תמונת השער', priceText:'נוסח המחירון', showName:'הצגת השם ליד הלוגו', gcCode:'קוד הסטטיסטיקה', a11yName:'רכז/ת הנגישות', a11yPhone:'טלפון לפניות נגישות', a11yEmail:'דוא"ל לפניות נגישות', serviceAreas:'אזורי השירות', ownerPhoto:'התמונה ב„קצת עליי”', aboutTitle:'הכותרת ב„קצת עליי”', ownerName:'השם ב„קצת עליי”', aboutText:'הטקסט ב„קצת עליי”', aboutPoints:'הנקודות ב„קצת עליי”'};
   Object.keys(SITE).forEach(function(k){ if ((S.site[k] || '') !== (D.site[k] || '')) out.push('שונה: ' + SITE[k]); });
   if (JSON.stringify(S.theme) !== JSON.stringify(D.theme)) out.push(S.theme.skin !== D.theme.skin ? 'סט עיצובי חדש: ' + SKINS[D.theme.skin].name : 'שינויי עיצוב (צבעים, גופנים או צורות)');
   if (JSON.stringify(S.categories) !== JSON.stringify(D.categories)) out.push('שינויים בקטגוריות');
   if (JSON.stringify(S.prices) !== JSON.stringify(D.prices)) out.push('שינוי במחירון');
+  if (JSON.stringify(S.packages) !== JSON.stringify(D.packages)) out.push('שינוי בחבילות');
+  if (JSON.stringify(S.faq) !== JSON.stringify(D.faq)) out.push('שינוי בשאלות הנפוצות');
+  if (JSON.stringify(S.booking) !== JSON.stringify(D.booking)) out.push('שינוי בטופס בדיקת התאריך');
   var sm = {}; S.works.forEach(function(w){ sm[w.id] = w; });
   var dm = {}; D.works.forEach(function(w){ dm[w.id] = w; });
   var add = D.works.filter(function(w){ return !sm[w.id]; }).length, del = S.works.filter(function(w){ return !dm[w.id]; }).length;
@@ -1563,13 +1715,13 @@ function renderEditor(){
   if (!ed.open){ box.innerHTML = ''; box.hidden = true; if (!lb.open) document.body.style.overflow = ''; return; }
   box.hidden = false; document.body.style.overflow = 'hidden';
   var title = ed.login ? 'התחברות לעריכה' : ed.form ? (ed.form.isNew ? 'עבודה חדשה' : 'עריכת עבודה') : 'עריכת הגלריה';
-  var body = ed.login ? loginForm() : ed.form ? workForm() : ed.tab === 'works' ? worksTab() : ed.tab === 'cats' ? catsTab() : ed.tab === 'design' ? designTab() : ed.tab === 'stats' ? statsTab() : siteTab();
+  var body = ed.login ? loginForm() : ed.form ? workForm() : ed.tab === 'works' ? worksTab() : ed.tab === 'cats' ? catsTab() : ed.tab === 'design' ? designTab() : ed.tab === 'stats' ? statsTab() : ed.tab === 'sales' ? salesTab() : siteTab();
   var foot = ed.login ? '<span class="meter"></span><button class="btn" data-act="login">התחברות</button>'
     : ed.form ? '<span class="meter"></span><button class="btn sec" data-act="form-cancel">ביטול</button><button class="btn" data-act="form-save">שמירת העבודה</button>'
     : '<span class="meter">'+(dirty ? 'יש שינויים שעדיין לא באתר' : 'כל השינויים באתר')+'</span><button class="btn" data-act="publish"'+(dirty?'':' disabled')+'>'+(dirty?'פרסום השינויים':'הכל מפורסם')+'</button>';
   box.innerHTML = '<div class="ed-back" data-act="close-editor"></div><aside class="ed" role="dialog" aria-modal="true" aria-label="'+title+'">' +
     '<div class="ed-head"><h2>'+title+'</h2><button class="ed-x" data-act="close-editor" aria-label="סגירה">×</button></div>' +
-    (ed.login || ed.form ? '' : '<div class="ed-tabs" role="tablist">' + [['works','עבודות'],['cats','קטגוריות'],['design','עיצוב'],['stats','סטטיסטיקה'],['site','פרטי העסק']].map(function(t){ return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(ed.tab===t[0])+'">'+t[1]+'</button>'; }).join('') + '</div>') +
+    (ed.login || ed.form ? '' : '<div class="ed-tabs" role="tablist">' + [['works','עבודות'],['cats','קטגוריות'],['design','עיצוב'],['sales','מכירה'],['stats','סטטיסטיקה'],['site','פרטי העסק']].map(function(t){ return '<button role="tab" data-tab="'+t[0]+'" aria-selected="'+(ed.tab===t[0])+'">'+t[1]+'</button>'; }).join('') + '</div>') +
     '<div class="ed-body">'+body+'</div><div class="ed-foot">'+foot+'</div></aside>';
   bindEditorInputs(box);
   var at = box.querySelector('.ed-tabs [aria-selected="true"]'); if (at && at.scrollIntoView) at.scrollIntoView({block:'nearest', inline:'nearest'});
@@ -1618,6 +1770,30 @@ function catsTab(){
         '<button class="ic" data-act="c-down" data-id="'+c.id+'" aria-label="הזזה למטה"'+(i===draft.categories.length-1?' disabled':'')+'>↓</button>' +
         '<button class="ic" data-act="c-del" data-id="'+c.id+'" style="color:#B3261E">'+delLabel('c-del'+c.id,'מחיקה')+'</button></li>';
     }).join('') + '</ul><div class="cat-add"><label class="sr" for="newcat">קטגוריה חדשה</label><input id="newcat" placeholder="קטגוריה חדשה"><button class="btn sec" data-act="c-add">הוספה</button></div>';
+}
+function salesTab(){
+  var B = draft.booking;
+  function inp(attr, id, field, val, ph, area){ return area ? '<textarea '+attr+'="'+id+':'+field+'" rows="3" placeholder="'+esc(ph||'')+'">'+esc(val)+'</textarea>' : '<input type="text" '+attr+'="'+id+':'+field+'" value="'+esc(val)+'" placeholder="'+esc(ph||'')+'" autocomplete="off">'; }
+  var book = '<h3 class="ed-sub" style="border:0;padding:0;margin-top:0">טופס „בדיקת תאריך פנוי”</h3>' +
+    '<label class="check"><input type="checkbox" id="bk-on"'+(B.on?' checked':'')+'>להציג את הטופס באתר</label>' +
+    '<div class="field"><label for="bk-note">משפט שמופיע מעל הטופס (לא חובה)</label><input type="text" id="bk-note" value="'+esc(B.note)+'" placeholder="למשל: אחזור אלייך עוד היום"></div>' +
+    '<p class="hint" style="margin-top:0">הלקוחה ממלאת תאריך, סוג אירוע, שירות, מספר מתארגנות ומיקום, ונפתח וואטסאפ עם הודעה מסודרת אלייך. לא נשמר שום מידע באתר.</p>';
+  var pk = '<h3 class="ed-sub">חבילות</h3><p class="hint" style="margin-top:0">כרטיסים עם מחיר ומה כלול. כל כרטיס כולל כפתור שממלא את החבילה בטופס.</p><ul class="rows">' +
+    draft.packages.map(function(x, i){ return '<li class="pk-edit"><div class="pk-grid">' +
+      '<label>שם החבילה' + inp('data-pk', x.id, 'name', x.name, 'למשל: כלה – תסרוקת ואיפור') + '</label>' +
+      '<label>מחיר' + inp('data-pk', x.id, 'price', x.price, 'למשל: 1,200') + '</label>' +
+      '<label class="check" style="margin:0"><input type="checkbox" data-pk="'+x.id+':from"'+(x.from?' checked':'')+'>להציג „החל מ-”</label>' +
+      '<label class="pk-wide">מה כלול (שורה לכל פריט)' + inp('data-pk', x.id, 'items', x.items, 'ניסיון לפני האירוע\nתסרוקת ואיפור ביום האירוע', true) + '</label>' +
+      '<label class="pk-wide">הערה (לא חובה)' + inp('data-pk', x.id, 'note', x.note, 'למשל: הגעה עד הבית בתוספת') + '</label></div>' +
+      '<div class="acts"><button class="ic" data-act="pk-up" data-id="'+x.id+'"'+(i?'':' disabled')+'>↑ למעלה</button><button class="ic" data-act="pk-del" data-id="'+x.id+'" style="color:#B3261E">'+delLabel('pk-del'+x.id,'מחיקה')+'</button></div></li>'; }).join('') +
+    '</ul><button class="btn sec" data-act="pk-add" style="margin-top:10px">+ הוספת חבילה</button>';
+  var fq = '<h3 class="ed-sub">שאלות נפוצות</h3><p class="hint" style="margin-top:0">שאלה מופיעה באתר רק כשיש לה תשובה. התשובות הן מדיניות העסק, ולכן כדאי לכתוב אותן בעצמך.</p><ul class="rows">' +
+    draft.faq.map(function(x, i){ return '<li class="pk-edit"><label>שאלה' + inp('data-fq', x.id, 'q', x.q, '') + '</label><label>תשובה' + inp('data-fq', x.id, 'a', x.a, 'התשובה שלך', true) + '</label>' +
+      (x.a.trim() ? '' : '<span class="hint" style="margin:0">עוד בלי תשובה, לא מוצגת באתר</span>') +
+      '<div class="acts"><button class="ic" data-act="fq-up" data-id="'+x.id+'"'+(i?'':' disabled')+'>↑ למעלה</button><button class="ic" data-act="fq-del" data-id="'+x.id+'" style="color:#B3261E">'+delLabel('fq-del'+x.id,'מחיקה')+'</button></div></li>'; }).join('') +
+    '</ul><div class="ctas" style="margin-top:10px"><button class="btn sec" data-act="fq-add">+ הוספת שאלה</button><button class="btn sec" data-act="fq-suggest">הוספת שאלות מוצעות</button></div>';
+  var tips = '<h3 class="ed-sub">ציטוטים ולפני/אחרי</h3><p class="hint" style="margin-top:0">ציטוט של לקוחה ותמונת „לפני” מוסיפים בתוך כל עבודה: לשונית „עבודות”, ואז „עריכה”. ציטוט מוצג רק באישור הלקוחה.</p>';
+  return book + pk + fq + tips;
 }
 var GC_KEY = 'gallery-gc-key-v1';
 var ST = {days:30, loading:false, data:null, err:'', at:0};
@@ -1678,9 +1854,10 @@ function statsTab(){
   var D = ST.data, ev = D.ev;
   function n(k){ return ev[k] || 0; }
   var opens = 0, asks = 0; Object.keys(ev).forEach(function(k){ if (/^open-\d+$/.test(k)) opens += ev[k]; if (/^wa-/.test(k)) asks += ev[k]; });
-  var tiles = [['ביקורים', D.visits], ['עבודות שנפתחו', opens], ['פניות בוואטסאפ', asks], ['צפיות במחירון', n('prices')]];
-  var rows = draft.works.map(function(w){ return {w:w, o:n('open-' + w.no), a:n('wa-' + w.no)}; }).filter(function(r){ return r.o || r.a; })
-    .sort(function(x, y){ return (y.a * 3 + y.o) - (x.a * 3 + x.o); }).slice(0, 15);
+  var shares = 0; Object.keys(ev).forEach(function(k){ if (/^share-/.test(k)) shares += ev[k]; });
+  var tiles = [['ביקורים', D.visits], ['עבודות שנפתחו', opens], ['פניות בוואטסאפ', asks], ['בקשות תאריך', n('book')], ['צפיות במחירון', n('prices')], ['שיתופים לחברות', shares]];
+  var rows = draft.works.map(function(w){ return {w:w, o:n('open-' + w.no), a:n('wa-' + w.no), s:n('share-' + w.no)}; }).filter(function(r){ return r.o || r.a || r.s; })
+    .sort(function(x, y){ return (y.a * 3 + y.s * 2 + y.o) - (x.a * 3 + x.s * 2 + x.o); }).slice(0, 15);
   var cats = draft.categories.map(function(c){
     var o = draft.works.filter(function(w){ return w.cat === c.id; }).reduce(function(s, w){ return s + n('open-' + w.no); }, 0);
     return {name:c.name, o:o, v:n('cat-' + c.id)}; }).filter(function(c){ return c.o || c.v; }).sort(function(a, b){ return b.o - a.o; });
@@ -1691,8 +1868,8 @@ function statsTab(){
     '<h3 class="ed-sub">העבודות שמשכו הכי הרבה עניין</h3>' +
     (rows.length ? '<ul class="rows">' + rows.map(function(r, i){
       return '<li class="row st-row"><img src="'+esc(src(r.w.images[0] ? r.w.images[0].thumb : ''))+'" alt=""><div><div class="t"><span class="row-no">#'+r.w.no+'</span> '+esc(r.w.title || TYPE_LABEL[r.w.type])+'</div>' +
-        '<div class="s">'+esc(catName(r.w.cat) || 'ללא קטגוריה')+'</div></div><div class="st-nums"><span><b>'+r.o+'</b> צפיות</span><span><b>'+r.a+'</b> פניות</span></div></li>'; }).join('') + '</ul>' +
-      '<p class="hint">הדירוג נותן משקל גבוה יותר לפנייה בוואטסאפ מאשר לצפייה, כי פנייה מעידה על עניין ממשי.</p>'
+        '<div class="s">'+esc(catName(r.w.cat) || 'ללא קטגוריה')+'</div></div><div class="st-nums"><span><b>'+r.o+'</b> צפיות</span><span><b>'+r.a+'</b> פניות</span>'+(r.s ? '<span><b>'+r.s+'</b> שיתופים</span>' : '')+'</div></li>'; }).join('') + '</ul>' +
+      '<p class="hint">הדירוג נותן את המשקל הגבוה ביותר לפנייה בוואטסאפ, אחריה לשיתוף לחברה, ואחריו לצפייה.</p>'
       : '<p class="hint">עוד אין צפיות בעבודות בתקופה הזו.</p>') +
     (cats.length ? '<h3 class="ed-sub">קטגוריות</h3><ul class="st-cats">' + cats.map(function(c){
       return '<li><span>'+esc(c.name)+'</span><i><b style="width:'+(c.o / cmax * 100)+'%"></b></i><em>'+c.o+'</em></li>'; }).join('') + '</ul><p class="hint">מספר הצפיות בעבודות של כל קטגוריה.</p>' : '') +
@@ -1750,7 +1927,8 @@ function siteTab(){
       '<label class="btn sec" style="cursor:pointer">'+(s.cover?'החלפה':'העלאה')+'<input type="file" accept="image/*" id="coverfile" style="display:none"></label>' + (s.cover ? '<button class="ic" data-act="cover-del">הסרה</button>' : '') + '</div>' +
       '<span class="hint" style="margin:0">מופיעה בראש העמוד בסט „קטלוג”. בלי תמונת שער, מוצגת העבודה הראשונה שסומנה ★.</span></div>' +
     (s.logo ? '<label class="check"><input type="checkbox" id="showname"'+(s.showName?' checked':'')+'>להציג גם את שם העסק מתחת ללוגו</label>' : '') +
-    f('name','שם העסק','text') + f('tagline','שורת תיאור קצרה','text') + f('about','משפט פתיחה בראש העמוד (לא חובה)','area','משפט או שניים שמופיעים מתחת לשם העסק') +
+    f('name','שם העסק','text') + f('tagline','שורת תיאור קצרה','text') +
+    f('serviceAreas','אזורי שירות','area','למשל: העיר שלך והיישובים הסמוכים, מופרדים בפסיקים','הערים והיישובים שבהם את עובדת, מופרדים בפסיקים. הם עוזרים לגוגל להציג את האתר למי שמחפשת באזור שלך, ומופיעים כהצעות בטופס התאריך.') + f('about','משפט פתיחה בראש העמוד (לא חובה)','area','משפט או שניים שמופיעים מתחת לשם העסק') +
     '<hr class="st-hr"><h3 class="ed-sub" style="border:0;padding:0;margin-top:0">קצת עליי</h3>' +
     '<p class="hint" style="margin-top:0">חלק שמציג את בעלת העסק, אחרי העבודות. הוא מופיע באתר ברגע שיש תמונה או טקסט.</p>' +
     '<div class="field"><span class="lbl">תמונה של בעלת העסק</span><div class="logo-edit"><div class="prev" style="width:96px;height:120px">' + (s.ownerPhoto ? '<img src="'+esc(src(s.ownerPhoto))+'" alt="התמונה הנוכחית" style="width:100%;height:100%;object-fit:cover">' : 'אין תמונה') + '</div>' +
@@ -1784,6 +1962,12 @@ function workForm(){
     '<div class="field"><span class="lbl">סוג העבודה</span><div class="radios">' + ['hair','makeup','both'].map(function(t){ return '<label><input type="radio" name="ftype" data-form="type" value="'+t+'"'+(F.type===t?' checked':'')+'>'+TYPE_LABEL[t]+'</label>'; }).join('') + '</div></div>' +
     '<div class="field"><label for="f-tags">מילות חיפוש</label><input type="text" id="f-tags" data-form="tags" value="'+esc(F.tags)+'" placeholder="גלים, שיער ארוך, אסוף נמוך"><span class="hint" style="margin:0">מופרדות בפסיקים.</span></div>' +
     '<div class="field"><label for="f-desc">תיאור (לא חובה)</label><textarea id="f-desc" data-form="desc">'+esc(F.desc)+'</textarea></div>' +
+    '<div class="field"><span class="lbl">תמונת „לפני” (לא חובה)</span><div class="thumbs">' +
+      (F.before ? '<div class="thumb"><img src="'+esc(src(F.before.thumb))+'" alt="תמונת לפני"><div class="tb"><span></span><button data-act="before-del">הסרה</button></div></div>' : '') +
+      '<label class="add-img">'+(F.before ? 'החלפת<br>„לפני”' : '+ תמונת<br>„לפני”')+'<input type="file" accept="image/*" id="beforefile"></label></div>' +
+      '<span class="hint" style="margin:6px 0 0">באתר תופיע השוואה בהחלקה בין „לפני” לבין התמונה הראשית. כדאי ששתיהן יצולמו מאותה זווית.</span></div>' +
+    '<div class="field"><label for="f-quote">ציטוט של הלקוחה (לא חובה)</label><textarea id="f-quote" data-form="quote" rows="2" placeholder="רק באישור הלקוחה, ובמילים שלה">'+esc(F.quote)+'</textarea></div>' +
+    '<div class="field"><label for="f-qname">שם בציטוט</label><input type="text" id="f-qname" data-form="quoteName" value="'+esc(F.quoteName)+'" placeholder="למשל: נועה, כלה"></div>' +
     '<label class="check"><input type="checkbox" data-form="visible"'+(F.visible?' checked':'')+'>מוצגת ללקוחות</label>' +
     '<label class="check"><input type="checkbox" data-form="featured"'+(F.featured?' checked':'')+'>בחלונות שבראש העמוד ★</label>' +
     (F.isNew ? '' : '<button class="btn danger" data-act="w-del" data-id="'+F.id+'" style="margin-top:10px">'+delLabel('w-del'+F.id,'מחיקת העבודה')+'</button>');
@@ -1805,6 +1989,18 @@ function bindEditorInputs(box){
     el.addEventListener('input', function(){ var r = val(); if (r.same) return; draft.theme[r.k] = r.v; applyTheme(draft.theme); });
     el.addEventListener('change', function(){ var r = val(); if (r.same && (draft.theme[r.k] || '') === (saved.theme[r.k] || '')) return; draft.theme[r.k] = r.v; markDirty(); });
   });
+  box.querySelectorAll('[data-pk],[data-fq]').forEach(function(el){
+    var isPk = el.hasAttribute('data-pk'), ref = (isPk ? el.dataset.pk : el.dataset.fq).split(':'), arr = isPk ? draft.packages : draft.faq;
+    el.addEventListener('change', function(){ var x = arr.filter(function(y){ return y.id === ref[0]; })[0]; if (!x) return;
+      var v = el.type === 'checkbox' ? el.checked : el.value.trim(); if (x[ref[1]] === v) return; x[ref[1]] = v; markDirty(); });
+  });
+  if (ed.focusNew){ var lastRow = box.querySelector('.ed-body .rows li:last-child input[type=text]'); var sec = ed.focusNew; ed.focusNew = null;
+    var rowsAll = box.querySelectorAll('.ed-body .rows'); var target = sec === 'pk' ? rowsAll[0] : rowsAll[rowsAll.length - 1];
+    var fi = target && target.querySelector('li:last-child input[type=text]'); if (fi) fi.focus(); }
+  var bo = box.querySelector('#bk-on'); if (bo) bo.addEventListener('change', function(){ draft.booking.on = bo.checked; markDirty(); });
+  var bn = box.querySelector('#bk-note'); if (bn) bn.addEventListener('change', function(){ var v = bn.value.trim(); if (v === draft.booking.note) return; draft.booking.note = v; markDirty(); });
+  var bfl = box.querySelector('#beforefile'); if (bfl) bfl.addEventListener('change', function(){ var fl = bfl.files && bfl.files[0]; if (!fl) return;
+    shrink(fl).then(function(d){ ed.form.before = d; renderEditor(); }, function(){ toast('הקובץ לא נטען. אפשר לנסות JPG או PNG.'); }); });
   var gk = box.querySelector('#gc-key-save'); if (gk) gk.addEventListener('click', function(){ var v = box.querySelector('#gc-key').value.trim(); if (!v) return; try { localStorage.setItem(GC_KEY, v); } catch(e){} ST.data = null; ST.err = ''; renderEditor(); });
   var bh = box.querySelector('#bulkhide'); if (bh) bh.addEventListener('change', function(){ ed.bulkHide = bh.checked; });
   var ak = box.querySelector('#ai-key-save'); if (ak) ak.addEventListener('click', function(){ var v = box.querySelector('#ai-key').value.trim(); if (!v) return; try{ localStorage.setItem(AI_KEY, v); }catch(e){} ed.bulkCat = AUTO; ed.bulkType = AUTO; renderEditor(); toast('הזיהוי האוטומטי מופעל במכשיר הזה.'); });
@@ -1915,14 +2111,14 @@ function setLogo(file){
 
 /* ---------- work form ---------- */
 function startForm(w){
-  ed.form = w ? {isNew:false, id:w.id, title:w.title, cat:w.cat, type:w.type, tags:w.tags.join(', '), desc:w.desc, images:w.images.slice(), visible:w.visible, featured:w.featured, review:w.review}
-              : {isNew:true, id:'w'+uid(), title:'', cat:ed.bulkCat||'', type:'hair', tags:'', desc:'', images:[], visible:true, featured:false};
+  ed.form = w ? {isNew:false, id:w.id, title:w.title, cat:w.cat, type:w.type, tags:w.tags.join(', '), desc:w.desc, images:w.images.slice(), visible:w.visible, featured:w.featured, review:w.review, quote:w.quote, quoteName:w.quoteName, before:w.before}
+              : {isNew:true, id:'w'+uid(), title:'', cat:ed.bulkCat||'', type:'hair', tags:'', desc:'', images:[], visible:true, featured:false, quote:'', quoteName:'', before:null};
   renderEditor(); var b = document.querySelector('.ed-body'); if (b) b.scrollTop = 0;
 }
 function saveForm(){
   var F = ed.form; if (!F.images.length){ toast('צריך לפחות תמונה אחת לעבודה.'); return; }
   var old = draft.works.filter(function(x){ return x.id === F.id; })[0];
-  var w = {no:old ? old.no : 0, id:F.id, title:F.title.trim(), cat:F.cat, type:F.type, tags:F.tags.split(/[,،]/).map(function(t){return t.trim();}).filter(Boolean), desc:F.desc.trim(), images:F.images, visible:F.visible, featured:F.featured, review:false};
+  var w = {no:old ? old.no : 0, id:F.id, title:F.title.trim(), cat:F.cat, type:F.type, tags:F.tags.split(/[,،]/).map(function(t){return t.trim();}).filter(Boolean), desc:F.desc.trim(), images:F.images, visible:F.visible, featured:F.featured, review:false, quote:(F.quote||'').trim(), quoteName:(F.quoteName||'').trim(), before:F.before || null};
   if (F.isNew) draft.works.unshift(w); else draft.works = draft.works.map(function(x){ return x.id === w.id ? w : x; });
   ed.form = null; ed.tab = 'works'; markDirty(); toast('העבודה נשמרה. „פרסום השינויים” מעלה אותה לאתר.');
 }
@@ -1931,7 +2127,7 @@ function saveForm(){
 function isData(s){ return typeof s === 'string' && s.indexOf('data:') === 0; }
 function imagePaths(st){
   var out = {}; if (st.site.logo && !isData(st.site.logo)) out[st.site.logo] = 1; if (st.site.cover && !isData(st.site.cover)) out[st.site.cover] = 1; if (st.site.ownerPhoto && !isData(st.site.ownerPhoto)) out[st.site.ownerPhoto] = 1; (st.prices || []).forEach(function(p){ if (!isData(p)) out[p] = 1; });
-  st.works.forEach(function(w){ w.images.forEach(function(i){ [i.full, i.thumb].forEach(function(p){ if (p && !isData(p)) out[p] = 1; }); }); });
+  st.works.forEach(function(w){ w.images.concat(w.before ? [w.before] : []).forEach(function(i){ [i.full, i.thumb].forEach(function(p){ if (p && !isData(p)) out[p] = 1; }); }); });
   return out;
 }
 function workPage(st, w, i){
@@ -1944,10 +2140,67 @@ function workPage(st, w, i){
     '<meta http-equiv="refresh" content="0;url='+esc(target)+'"></head><body style="font-family:Arial,sans-serif;text-align:center;padding:40px">' +
     '<p><a href="'+esc(target)+'">לצפייה בעבודה בגלריה</a></p></body></html>';
 }
+function ldEsc(o){ return JSON.stringify(o).replace(/</g, '\\u003c'); }
+function seoDesc(st){
+  var A = (st.site.serviceAreas || '').split(/[,،\n]/).map(function(x){ return x.trim(); }).filter(Boolean);
+  return (st.site.tagline || '') + (A.length ? ' | ' + A.slice(0, 6).join(', ') : '') + '. גלריית עבודות ובדיקת תאריך פנוי בוואטסאפ.';
+}
+function ldJson(st){
+  var s = st.site, base = siteBase(), A = (s.serviceAreas || '').split(/[,،\n]/).map(function(x){ return x.trim(); }).filter(Boolean);
+  var ph = String(s.phone || '').replace(/\D/g, ''); if (ph.charAt(0) === '0') ph = '+972-' + ph.slice(1);
+  var o = {'@context':'https://schema.org', '@type':'BeautySalon', name:s.name, description:seoDesc(st), url:base};
+  if (ph) o.telephone = ph;
+  if (s.logo) o.logo = base + s.logo;
+  var vis = st.works.filter(function(w){ return w.visible && w.images.length; });
+  if (vis.length) o.image = vis.slice(0, 5).map(function(w){ return base + w.images[0].full; });
+  if (A.length) o.areaServed = A.map(function(a){ return {'@type':'City', name:a}; });
+  if (s.instagram) o.sameAs = [s.instagram];
+  var P = (st.packages || []).filter(function(x){ return x.name; });
+  if (P.length) o.makesOffer = P.map(function(x){ var n = parseFloat(String(x.price).replace(/[^\d.]/g, '')); var of = {'@type':'Offer', name:x.name, priceCurrency:'ILS'}; if (n) of.price = n; return of; });
+  var F = (st.faq || []).filter(function(x){ return x.q && x.a; });
+  var out = '<script type="application/ld+json">' + ldEsc(o) + '</' + 'script>';
+  if (F.length) out += '\n<script type="application/ld+json">' + ldEsc({'@context':'https://schema.org', '@type':'FAQPage', mainEntity:F.map(function(x){ return {'@type':'Question', name:x.q, acceptedAnswer:{'@type':'Answer', text:x.a}}; })}) + '</' + 'script>';
+  return out;
+}
+function staticBody(st){
+  var s = st.site, A = (s.serviceAreas || '').split(/[,،\n]/).map(function(x){ return x.trim(); }).filter(Boolean);
+  var cats = st.categories.filter(function(c){ return st.works.some(function(w){ return w.visible && w.images.length && w.cat === c.id; }); });
+  var F = (st.faq || []).filter(function(x){ return x.q && x.a; });
+  return '<div class="seo-static"><h1>' + esc(s.name) + '</h1><p>' + esc(s.tagline) + '</p>' + (A.length ? '<p>אזורי שירות: ' + esc(A.join(', ')) + '</p>' : '') +
+    (cats.length ? '<ul>' + cats.map(function(c){ return '<li><a href="c/' + c.id + '.html">' + esc(c.name) + '</a></li>'; }).join('') + '</ul>' : '') +
+    (s.aboutText ? '<h2>' + esc(s.aboutTitle || 'נעים להכיר') + '</h2><p>' + esc(s.aboutText) + '</p>' : '') +
+    (F.length ? '<h2>שאלות נפוצות</h2>' + F.map(function(x){ return '<h3>' + esc(x.q) + '</h3><p>' + esc(x.a) + '</p>'; }).join('') : '') + '</div>';
+}
+function catPage(st, c){
+  var s = st.site, base = siteBase(), A = (s.serviceAreas || '').split(/[,،\n]/).map(function(x){ return x.trim(); }).filter(Boolean);
+  var ws = st.works.filter(function(w){ return w.visible && w.images.length && w.cat === c.id; });
+  var title = c.name + ' | ' + s.name, desc = c.name + ' – ' + ws.length + ' עבודות של ' + s.name + '. ' + (s.tagline || '') + (A.length ? ' ב' + A.slice(0, 4).join(', ') : '') + '.';
+  var ph = String(s.phone || '').replace(/\D/g, ''); if (ph.charAt(0) === '0') ph = '972' + ph.slice(1);
+  var wa = ph ? 'https://wa.me/' + ph + '?text=' + encodeURIComponent('היי, ראיתי את עמוד ה' + c.name + ' באתר ואשמח לבדוק תאריך פנוי') : '';
+  var L = lightVars(normTheme(st.theme));
+  return '<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">' +
+    '<title>' + esc(title) + '</title><meta name="description" content="' + esc(desc) + '"><link rel="canonical" href="' + esc(base + 'c/' + c.id + '.html') + '">' +
+    '<meta property="og:title" content="' + esc(title) + '"><meta property="og:description" content="' + esc(desc) + '">' + (ws[0] ? '<meta property="og:image" content="' + esc(base + ws[0].images[0].thumb) + '">' : '') +
+    '<style>body{margin:0;font-family:Assistant,"Segoe UI",Arial,sans-serif;background:' + L.bg + ';color:' + L.ink + ';line-height:1.6}main{max-width:1100px;margin:0 auto;padding:28px 20px 60px}' +
+    'h1{font-size:clamp(2rem,6vw,3.2rem);line-height:1.1;margin:0 0 8px}a{color:' + L.accent + '}.top{display:flex;gap:12px;flex-wrap:wrap;margin:18px 0 26px}' +
+    '.btn{display:inline-block;background:' + L.accent + ';color:' + onColor(L.accent) + ';text-decoration:none;padding:11px 20px;border-radius:999px;font-weight:600}.btn.g{background:transparent;color:' + L.accent + ';box-shadow:inset 0 0 0 1.5px ' + L.accent + '}' +
+    '.g2{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:14px}.g2 a{text-decoration:none;color:inherit}.g2 img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;display:block;background:' + L.blush + '}.g2 span{display:block;font-size:.95rem;margin-top:6px}</style>' +
+    '<script type="application/ld+json">' + ldEsc({'@context':'https://schema.org', '@type':'CollectionPage', name:title, description:desc, url:base + 'c/' + c.id + '.html', isPartOf:{'@type':'WebSite', name:s.name, url:base}}) + '</' + 'script></head><body><main>' +
+    '<p><a href="../">' + esc(s.name) + '</a></p><h1>' + esc(c.name) + '</h1><p>' + esc(desc) + '</p>' +
+    '<div class="top"><a class="btn" href="../#cat=' + c.id + '">לצפייה בגלריה המלאה</a>' + (wa ? '<a class="btn g" href="' + esc(wa) + '">בדיקת תאריך בוואטסאפ</a>' : '') + '</div>' +
+    '<div class="g2">' + ws.map(function(w){ var t = [w.no ? 'עבודה מס׳ ' + w.no : '', w.title || TYPE_LABEL[w.type]].filter(Boolean).join(' · ');
+      return '<a href="../#w=' + w.id + '&amp;i=1"><img src="../' + esc(w.images[0].thumb) + '" alt="' + esc((w.title || TYPE_LABEL[w.type]) + ', ' + c.name) + '" loading="lazy"><span>' + esc(t) + '</span></a>'; }).join('') + '</div>' +
+    '</main></body></html>';
+}
+function sitemap(st){
+  var base = siteBase(), d = new Date().toISOString().slice(0, 10);
+  var urls = [base].concat((st.catPages || []).map(function(id){ return base + 'c/' + id + '.html'; }));
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls.map(function(u){ return '<url><loc>' + esc(u) + '</loc><lastmod>' + d + '</lastmod></url>'; }).join('\n') + '\n</urlset>\n';
+}
 function ogBlock(st){
   var s = st.site, vis = st.works.filter(function(w){return w.visible && w.images.length;}), f = vis.filter(function(w){return w.featured;})[0] || vis[0];
   var img = f ? f.images[0].thumb : s.logo, base = siteBase();
-  return '<!--og-->\n<title>'+esc(s.name)+'</title>\n<meta name="description" content="'+esc(s.tagline)+'">\n<meta property="og:title" content="'+esc(s.name)+'">\n<meta property="og:description" content="'+esc(s.tagline)+'">\n<meta property="og:type" content="website">\n' +
+  return '<!--og-->\n<title>'+esc(s.name + (s.tagline ? ' | ' + s.tagline : ''))+'</title>\n<link rel="canonical" href="'+esc(base)+'">\n' + ldJson(st) + '\n<meta name="description" content="'+esc(seoDesc(st))+'">\n<meta property="og:title" content="'+esc(s.name)+'">\n<meta property="og:description" content="'+esc(s.tagline)+'">\n<meta property="og:type" content="website">\n' +
     (img ? '<meta property="og:image" content="'+esc(base + img)+'">\n' : '') + '<!--/og-->';
 }
 function publish(){
@@ -1970,7 +2223,9 @@ function publish(){
     state.works.forEach(function(w){ w.images = w.images.map(function(i){
       if (!isData(i.full)) return i; var id = uid();
       return {full:queue(i.full, 'images/' + id + '.jpg'), thumb:queue(i.thumb, 'images/' + id + '-t.jpg')};
-    }); });
+    });
+    if (w.before && isData(w.before.full)){ var bid = uid(); w.before = {full:queue(w.before.full, 'images/' + bid + '-b.jpg'), thumb:queue(w.before.thumb, 'images/' + bid + '-bt.jpg')}; }
+    });
     var n = 0;
     return uploads.reduce(function(p, u){ return p.then(function(){
       busy.textContent = 'מעלה תמונות… ' + (++n) + ' מתוך ' + uploads.length;
@@ -1991,6 +2246,12 @@ function publish(){
       for (var i = keep + 1; i <= oldPages[id]; i++) tree.push({path:'w/' + id + '-' + i + '.html', mode:'100644', type:'blob', sha:null});
     });
     state.pages = state.works.filter(function(w){ return w.visible && w.images.length; }).map(function(w){ return w.id; });
+    var cats = state.categories.filter(function(c){ return state.works.some(function(w){ return w.visible && w.images.length && w.cat === c.id; }); });
+    cats.forEach(function(c){ tree.push({path:'c/' + c.id + '.html', mode:'100644', type:'blob', content:catPage(state, c)}); });
+    (saved.catPages || []).forEach(function(id){ if (!cats.some(function(c){ return c.id === id; })) tree.push({path:'c/' + id + '.html', mode:'100644', type:'blob', sha:null}); });
+    state.catPages = cats.map(function(c){ return c.id; });
+    tree.push({path:'sitemap.xml', mode:'100644', type:'blob', content:sitemap(state)});
+    tree.push({path:'robots.txt', mode:'100644', type:'blob', content:'User-agent: *\nAllow: /\nSitemap: ' + siteBase() + 'sitemap.xml\n'});
     var text = JSON.stringify(state);
     tree.push({path:'data.json', mode:'100644', type:'blob', content:text});
     state._text = text;
@@ -1998,6 +2259,7 @@ function publish(){
   }).then(function(idx){
     if (idx && idx.indexOf('<!--og-->') !== -1){
       var nidx = idx.replace(/<!--og-->[\s\S]*?<!--\/og-->/, ogBlock(state));
+      if (nidx.indexOf('<!--static-->') !== -1) nidx = nidx.replace(/<!--static-->[\s\S]*?<!--\/static-->/, '<!--static-->' + staticBody(state) + '<!--/static-->');
       if (nidx !== idx) tree.push({path:'index.html', mode:'100644', type:'blob', content:nidx});
     }
     return ghFetch('/git/trees', {method:'POST', body:{base_tree:baseTree, tree:tree}});
@@ -2035,7 +2297,7 @@ document.addEventListener('click', function(e){
   if (t.dataset.tag){ ui.q = t.dataset.tag; ui.cat = 'all'; ui.type = 'all'; closeLB(); render(); var g = document.getElementById('works'); if (g) g.scrollIntoView(); return; }
   if (t.dataset.tab){ ed.tab = t.dataset.tab; ed.pending = null; renderEditor(); return; }
   var a = t.dataset.act, id = t.dataset.id, w = id && draft.works.filter(function(x){return x.id===id;})[0];
-  if (ed.pending && a !== 'discard' && a !== 'w-del' && a !== 'c-del' && a !== 'close-editor' && a !== 'logout' && a !== 'approve-all' && a !== 'ai-off' && a !== 'th-reset' && a !== 'gc-key-del'){ ed.pending = null; if (ed.open) renderEditor(); }
+  if (ed.pending && !/^(pk-del|fq-del)$/.test(a) && a !== 'discard' && a !== 'w-del' && a !== 'c-del' && a !== 'close-editor' && a !== 'logout' && a !== 'approve-all' && a !== 'ai-off' && a !== 'th-reset' && a !== 'gc-key-del'){ ed.pending = null; if (ed.open) renderEditor(); }
   switch (a){
     case 'clear': ui = {q:'', cat:'all', type:'all', all:false}; render(); break;
     case 'st-days': ST.days = +t.dataset.k; loadStats(); break;
@@ -2058,6 +2320,21 @@ document.addEventListener('click', function(e){
       if (ed.pending !== 'discard'){ ed.pending = 'discard'; showPending(); return; }
       ed.pending = null; draft = clone(saved); dirty = needPages; lastErr = ''; doc.open = null; renderDoc(); render(); if (ed.open) renderEditor();
       toast(needPages ? 'השינויים בוטלו. נשאר רק עדכון חד-פעמי של מספרי העבודות, שדורש פרסום אחד.' : 'השינויים בוטלו. הגלריה חזרה למה שמפורסם באתר.', 6000); break;
+    case 'share-work': shareWork(); break;
+    case 'ba-toggle': lb.ba = !lb.ba; renderLB(); if (lb.ba) track('ba-' + curWork().no, 'לפני ואחרי ' + workTitle(curWork())); break;
+    case 'pkg-book':
+      ui.pkg = t.dataset.k; track('pkg-' + ui.pkg, 'חבילה: ' + ((draft.packages.filter(function(x){ return x.id === ui.pkg; })[0] || {}).name || ''));
+      var sel = document.getElementById('bf-pkg'); if (sel) sel.value = ui.pkg;
+      var bk = document.getElementById('book'); if (bk){ bk.scrollIntoView({behavior: motionAllowed() ? 'smooth' : 'auto'}); var dd = document.getElementById('bf-date'); if (dd) dd.focus({preventScroll:true}); }
+      break;
+    case 'pk-add': draft.packages.push({id:'p'+uid(), name:'', price:'', from:true, items:'', note:''}); ed.focusNew = 'pk'; markDirty(); break;
+    case 'pk-del': if (!needConfirm('pk-del'+id)) return; draft.packages = draft.packages.filter(function(x){ return x.id !== id; }); markDirty(); break;
+    case 'pk-up': moveIn(draft.packages, id, -1); break;
+    case 'fq-add': draft.faq.push({id:'q'+uid(), q:'', a:''}); ed.focusNew = 'fq'; markDirty(); break;
+    case 'fq-suggest': FAQ_SUGGEST.forEach(function(q){ if (!draft.faq.some(function(x){ return x.q === q; })) draft.faq.push({id:'q'+uid(), q:q, a:''}); }); markDirty(); toast('נוספו שאלות מוצעות. שאלה תופיע באתר רק אחרי שכותבים לה תשובה.', 5000); break;
+    case 'fq-del': if (!needConfirm('fq-del'+id)) return; draft.faq = draft.faq.filter(function(x){ return x.id !== id; }); markDirty(); break;
+    case 'fq-up': moveIn(draft.faq, id, -1); break;
+    case 'before-del': ed.form.before = null; renderEditor(); break;
     case 'col-back': ui.cat = 'all'; ui.all = false; ui.q = ''; var qi = document.getElementById('q'); if (qi) qi.value = ''; renderGrid(); scrollWorks(); break;
     case 'owner-del': draft.site.ownerPhoto = ''; markDirty(); break;
     case 'cover-del': draft.site.cover = ''; markDirty(); break;
@@ -2118,6 +2395,7 @@ document.addEventListener('click', function(e){
   }
 });
 document.addEventListener('touchstart', function(){}, {passive:true});
+document.addEventListener('submit', function(e){ if (e.target && e.target.id === 'book-form'){ e.preventDefault(); submitBooking(); } });
 document.addEventListener('input', function(e){ if (e.target.id === 'q'){ ui.q = e.target.value; renderGrid(); } });
 document.addEventListener('keydown', function(e){
   if (e.key === 'Tab') trapFocus(e);
@@ -2143,6 +2421,9 @@ window.__previewSkin = function(k){ if (!SKINS[k]) return; draft.theme = skinThe
 render();
 function handleHash(){
   var hs = location.hash || '';
+  var cm = hs.match(/^#cat=([^&]+)/);
+  if (cm){ var cid = decodeURIComponent(cm[1]); if (catName(cid)){ ui.cat = cid; ui.all = false; render(); var wk = document.getElementById('works'); if (wk) wk.scrollIntoView(); } try { history.replaceState(null, '', location.pathname + location.search); } catch(e){} return; }
+  if (/^#(book|about|faq|packages|reviews|works)$/.test(hs)){ var tg = document.getElementById(hs.slice(1)); if (tg) setTimeout(function(){ tg.scrollIntoView(); }, 50); return; }
   if (hs === '#prices'){ track('prices', 'צפייה במחירון'); doc.open = 'prices'; doc.ret = null; renderDoc(); return; }
   var m = hs.match(/[#&]w=([^&]+)(?:&i=(\d+))?/);
   if (!m) return;
