@@ -750,7 +750,7 @@ var DEFAULTS = {
   v:2,
   site:{ name:'שם הסטודיו', tagline:'תסרוקות ערב ואיפור לנשים ולנערות', about:'', phone:'', instagram:'', waMessage:'היי, הגעתי מהגלריה ואשמח לשמוע פרטים', logo:'', cover:'', ownerPhoto:'', aboutTitle:'', ownerName:'', aboutText:'', aboutPoints:'', priceText:'', serviceAreas:'', gcCode:'', showName:'yes', a11yName:'', a11yPhone:'', a11yEmail:'', a11yDate:'' },
   categories:[{id:'c1',name:'כלות'},{id:'c2',name:'ערב ואירועים'},{id:'c3',name:'בת מצווה'}],
-  works:[], packages:[], faq:[], booking:{on:true, note:''}, catPages:[]
+  works:[], packages:[], faq:[], booking:{on:true, note:'', types:null}, catPages:[]
 };
 var FAQ_SUGGEST = ['האם יש ניסיון לפני האירוע?', 'האם את מגיעה עד הבית או לאולם?', 'כמה זמן לוקחת תסרוקת או איפור?', 'כמה זמן מראש כדאי להזמין?', 'איך שומרים תאריך ומה מדיניות הביטול?', 'אפשר להגיע עם תמונת השראה?', 'האם את עובדת גם עם מלוות (אמא, אחיות, חברות)?'];
 /* ---------- theme ---------- */
@@ -943,7 +943,7 @@ function trapFocus(e){
 function normImg(i){ return typeof i === 'string' ? {full:i, thumb:i} : (i && i.full ? {full:i.full, thumb:i.thumb || i.full} : null); }
 function normalize(d){
   var o = clone(DEFAULTS);
-  o.theme = normTheme(d && d.theme); o.prices = []; o.pages = []; o.packages = []; o.faq = []; o.booking = {on:true, note:''}; o.catPages = [];
+  o.theme = normTheme(d && d.theme); o.prices = []; o.pages = []; o.packages = []; o.faq = []; o.booking = {on:true, note:'', types:null}; o.catPages = [];
   if (!d || !d.site) return o;
   for (var k in o.site) if (typeof d.site[k] === 'string') o.site[k] = d.site[k];
   if (Array.isArray(d.categories)) o.categories = d.categories.filter(function(c){return c && c.id;});
@@ -955,7 +955,7 @@ function normalize(d){
   o.prices = Array.isArray(d.prices) ? d.prices.filter(function(x){ return typeof x === 'string' && x; }) : [];
   o.packages = Array.isArray(d.packages) ? d.packages.filter(function(x){ return x && x.id; }).map(function(x){ return {id:x.id, name:x.name||'', price:x.price||'', from:!!x.from, items:x.items||'', note:x.note||''}; }) : [];
   o.faq = Array.isArray(d.faq) ? d.faq.filter(function(x){ return x && x.id; }).map(function(x){ return {id:x.id, q:x.q||'', a:x.a||''}; }) : [];
-  o.booking = {on: !(d.booking && d.booking.on === false), note: (d.booking && typeof d.booking.note === 'string') ? d.booking.note : ''};
+  o.booking = {on: !(d.booking && d.booking.on === false), note: (d.booking && typeof d.booking.note === 'string') ? d.booking.note : '', types: (d.booking && Array.isArray(d.booking.types)) ? d.booking.types.filter(function(x){ return typeof x === 'string'; }) : null};
   o.catPages = Array.isArray(d.catPages) ? d.catPages.filter(function(x){ return typeof x === 'string'; }) : [];
   o.pages = Array.isArray(d.pages) ? d.pages.filter(function(x){ return typeof x === 'string'; }) : [];
   ensureNumbers(o.works);
@@ -1256,13 +1256,13 @@ function pkgHTML(){
 function bookHTML(s, wa){
   if (!draft.booking.on || !wa) return '';
   var today = isoDay(new Date()), A = areas(), P = draft.packages.filter(function(x){ return x.name.trim(); });
-  var types = draft.categories.map(function(c){ return c.name; }).concat(['אחר']);
+  var types = eventTypes();
   return '<section class="book" id="book" tabindex="-1" aria-labelledby="book-h"><div class="book-card"><p class="am-kicker">הזמנה</p><h2 id="book-h" class="sec-h">בדיקת תאריך פנוי</h2>' +
     '<p class="hint" style="margin:0 0 16px">ממלאים כמה פרטים, ונפתח וואטסאפ עם הודעה מוכנה. '+esc(draft.booking.note || '')+'</p>' +
     '<form id="book-form" novalidate><div class="bf-grid">' +
       '<div class="field"><label for="bf-date">תאריך האירוע *</label><input type="date" id="bf-date" min="'+today+'" required aria-describedby="bf-err"></div>' +
       '<div class="field"><label for="bf-time">שעת האירוע</label><input type="time" id="bf-time"></div>' +
-      '<div class="field"><label for="bf-type">סוג האירוע</label><select id="bf-type"><option value="">בחירה</option>' + types.map(function(t){ return '<option>'+esc(t)+'</option>'; }).join('') + '</select></div>' +
+      (types.length ? '<div class="field"><label for="bf-type">סוג האירוע</label><select id="bf-type"><option value="">בחירה</option>' + types.map(function(t){ return '<option>'+esc(t)+'</option>'; }).join('') + '</select></div>' : '') +
       '<div class="field"><label for="bf-count">כמה מתארגנות</label><input type="number" id="bf-count" min="1" max="30" inputmode="numeric" value="1"></div>' +
       '<div class="field bf-wide"><span class="lbl" id="bf-svc-l">מה צריך</span><div class="radios" role="radiogroup" aria-labelledby="bf-svc-l">' +
         [['both','תסרוקת ואיפור'],['hair','תסרוקת'],['makeup','איפור']].map(function(o, i){ return '<label><input type="radio" name="bf-svc" value="'+o[1]+'"'+(i===0?' checked':'')+'>'+o[1]+'</label>'; }).join('') + '</div></div>' +
@@ -1272,6 +1272,8 @@ function bookHTML(s, wa){
       '<div class="field bf-wide"><label for="bf-notes">משהו נוסף? (לא חובה)</label><textarea id="bf-notes" rows="2" placeholder="למשל: שיער ארוך, רוצה לוק דומה לעבודה מס׳ 12"></textarea></div>' +
     '</div><p class="bf-err" id="bf-err" role="alert"></p><button class="cta" type="submit">'+ICON_CHAT+'שליחה בוואטסאפ</button></form></div></section>';
 }
+var DEFAULT_EVENTS = ['חתונה', 'חינה', 'אירוסין', 'בת מצווה', 'מסיבת סיום', 'אירוע משפחתי', 'צילומים', 'אחר'];
+function eventTypes(){ var T = draft.booking.types; return (T ? T : DEFAULT_EVENTS).map(function(x){ return x.trim(); }).filter(Boolean); }
 function faqHTML(){
   var F = faqItems(); if (!F.length) return '';
   return '<section class="faq" id="faq" tabindex="-1" aria-labelledby="faq-h"><p class="am-kicker">שאלות ותשובות</p><h2 id="faq-h" class="sec-h">שאלות נפוצות</h2>' +
@@ -1777,7 +1779,14 @@ function salesTab(){
   var book = '<h3 class="ed-sub" style="border:0;padding:0;margin-top:0">טופס „בדיקת תאריך פנוי”</h3>' +
     '<label class="check"><input type="checkbox" id="bk-on"'+(B.on?' checked':'')+'>להציג את הטופס באתר</label>' +
     '<div class="field"><label for="bk-note">משפט שמופיע מעל הטופס (לא חובה)</label><input type="text" id="bk-note" value="'+esc(B.note)+'" placeholder="למשל: אחזור אלייך עוד היום"></div>' +
-    '<p class="hint" style="margin-top:0">הלקוחה ממלאת תאריך, סוג אירוע, שירות, מספר מתארגנות ומיקום, ונפתח וואטסאפ עם הודעה מסודרת אלייך. לא נשמר שום מידע באתר.</p>';
+    '<p class="hint" style="margin-top:0">הלקוחה ממלאת תאריך, סוג אירוע, שירות, מספר מתארגנות ומיקום, ונפתח וואטסאפ עם הודעה מסודרת אלייך. לא נשמר שום מידע באתר.</p>' +
+    '<div class="field"><span class="lbl">סוגי האירוע בטופס</span>' + (B.types === null
+      ? '<p class="hint" style="margin:0 0 8px">כרגע מוצגת רשימת ברירת המחדל: ' + esc(eventTypes().join(', ')) + '.</p><div><button class="btn sec" data-act="bt-seed">עריכת הרשימה</button></div>'
+      : '<ul class="rows">' + B.types.map(function(t, i){ return '<li class="cat-row"><label class="sr" for="bt-'+i+'">סוג אירוע</label><input id="bt-'+i+'" data-bt="'+i+'" value="'+esc(t)+'">' +
+          '<button class="ic" data-act="bt-up" data-k="'+i+'" aria-label="הזזה למעלה"'+(i?'':' disabled')+'>↑</button><button class="ic" data-act="bt-down" data-k="'+i+'" aria-label="הזזה למטה"'+(i<B.types.length-1?'':' disabled')+'>↓</button>' +
+          '<button class="ic" data-act="bt-del" data-k="'+i+'" style="color:#B3261E">מחיקה</button></li>'; }).join('') + '</ul>' +
+        '<div class="cat-add"><label class="sr" for="bt-new">סוג אירוע חדש</label><input id="bt-new" placeholder="למשל: חינה, שבע ברכות, צילומי זוגיות"><button class="btn sec" data-act="bt-add">הוספה</button></div>' +
+        '<p class="hint" style="margin:8px 0 0">' + (B.types.length ? 'הסדר כאן הוא הסדר ברשימה בטופס.' : 'הרשימה ריקה, ולכן השדה „סוג האירוע” לא יופיע בטופס.') + ' <button class="linkbtn" data-act="bt-reset">חזרה לרשימת ברירת המחדל</button></p>') + '</div>';
   var pk = '<h3 class="ed-sub">חבילות</h3><p class="hint" style="margin-top:0">כרטיסים עם מחיר ומה כלול. כל כרטיס כולל כפתור שממלא את החבילה בטופס.</p><ul class="rows">' +
     draft.packages.map(function(x, i){ return '<li class="pk-edit"><div class="pk-grid">' +
       '<label>שם החבילה' + inp('data-pk', x.id, 'name', x.name, 'למשל: כלה – תסרוקת ואיפור') + '</label>' +
@@ -1997,6 +2006,8 @@ function bindEditorInputs(box){
   if (ed.focusNew){ var lastRow = box.querySelector('.ed-body .rows li:last-child input[type=text]'); var sec = ed.focusNew; ed.focusNew = null;
     var rowsAll = box.querySelectorAll('.ed-body .rows'); var target = sec === 'pk' ? rowsAll[0] : rowsAll[rowsAll.length - 1];
     var fi = target && target.querySelector('li:last-child input[type=text]'); if (fi) fi.focus(); }
+  box.querySelectorAll('[data-bt]').forEach(function(el){ el.addEventListener('change', function(){ var i = +el.dataset.bt, v = el.value.trim(), BT = draft.booking.types; if (!BT || BT[i] === v) return; if (!v){ el.value = BT[i]; return; } BT[i] = v; markDirty(); }); });
+  var btn2 = box.querySelector('#bt-new'); if (btn2) btn2.addEventListener('keydown', function(e){ if (e.key === 'Enter'){ e.preventDefault(); var b = box.querySelector('[data-act="bt-add"]'); if (b) b.click(); } });
   var bo = box.querySelector('#bk-on'); if (bo) bo.addEventListener('change', function(){ draft.booking.on = bo.checked; markDirty(); });
   var bn = box.querySelector('#bk-note'); if (bn) bn.addEventListener('change', function(){ var v = bn.value.trim(); if (v === draft.booking.note) return; draft.booking.note = v; markDirty(); });
   var bfl = box.querySelector('#beforefile'); if (bfl) bfl.addEventListener('change', function(){ var fl = bfl.files && bfl.files[0]; if (!fl) return;
@@ -2327,6 +2338,11 @@ document.addEventListener('click', function(e){
       var sel = document.getElementById('bf-pkg'); if (sel) sel.value = ui.pkg;
       var bk = document.getElementById('book'); if (bk){ bk.scrollIntoView({behavior: motionAllowed() ? 'smooth' : 'auto'}); var dd = document.getElementById('bf-date'); if (dd) dd.focus({preventScroll:true}); }
       break;
+    case 'bt-seed': draft.booking.types = eventTypes(); markDirty(); break;
+    case 'bt-add': var bn2 = document.getElementById('bt-new'), bv = bn2 && bn2.value.trim(); if (!bv) return; if (draft.booking.types.indexOf(bv) === -1) draft.booking.types.push(bv); markDirty(); var nb = document.getElementById('bt-new'); if (nb) nb.focus(); break;
+    case 'bt-del': draft.booking.types.splice(+t.dataset.k, 1); markDirty(); break;
+    case 'bt-up': case 'bt-down': var bi = +t.dataset.k, bj = bi + (a === 'bt-up' ? -1 : 1), BT = draft.booking.types; if (bj < 0 || bj >= BT.length) return; var tmp = BT[bi]; BT[bi] = BT[bj]; BT[bj] = tmp; markDirty(); break;
+    case 'bt-reset': draft.booking.types = null; markDirty(); break;
     case 'pk-add': draft.packages.push({id:'p'+uid(), name:'', price:'', from:true, items:'', note:''}); ed.focusNew = 'pk'; markDirty(); break;
     case 'pk-del': if (!needConfirm('pk-del'+id)) return; draft.packages = draft.packages.filter(function(x){ return x.id !== id; }); markDirty(); break;
     case 'pk-up': moveIn(draft.packages, id, -1); break;
