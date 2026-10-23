@@ -619,6 +619,9 @@ html.scrolled[data-skin="night"] .home-badge{opacity:1;pointer-events:auto;trans
   .ed-tabs{gap:0;padding-inline:10px;-webkit-mask-image:linear-gradient(to left,#000 88%,transparent);mask-image:linear-gradient(to left,#000 88%,transparent)}
   .ed-tabs button{padding:9px 11px}
 }
+
+.draft-bar{gap:10px}
+.docpage ul{padding-right:20px}
 </style>
 </head>
 <body>
@@ -857,6 +860,7 @@ function askText(w, img){
     (w.images.length > 1 ? ' (תמונה ' + ((img||0)+1) + ' מתוך ' + w.images.length + ')' : '') + '\n' + workLink(w, img);
 }
 
+var needPages = false, lastErr = '';
 var saved = normalize(null), draft = normalize(null), dirty = false, loaded = false;
 var ui = {q:'', cat:'all', type:'all', all:false};
 var ed = {open:false, tab:'works', form:null, pending:null, bulkCat:'', bulkType:'hair', bulkHide:false, login:false, reviewOnly:false};
@@ -901,7 +905,9 @@ function ghError(e){
   if (s === 401) return 'הטוקן לא תקין או שפג תוקפו. צריך ליצור טוקן חדש ולהתחבר שוב.';
   if (s === 403) return 'לטוקן אין הרשאת כתיבה למאגר. צריך לבדוק שניתנה לו הרשאת Contents: Read and write.';
   if (s === 404) return 'המאגר לא נמצא. צריך לבדוק את שם המשתמש ושם המאגר, ושהטוקן ניתן למאגר הזה.';
-  if (s === 409 || s === 422) return 'הגלריה עודכנה ממכשיר אחר בדיוק עכשיו. אפשר לנסות לפרסם שוב.';
+  if (s === 409) return 'הגלריה עודכנה ממכשיר אחר בדיוק עכשיו. אפשר לנסות לפרסם שוב.';
+  var m = ''; try { m = JSON.parse(e.body || '{}').message || ''; } catch(_){}
+  if (s) return 'GitHub דחה את השמירה (קוד ' + s + (m ? ': ' + m : '') + '). השינויים עדיין כאן.';
   return 'אין חיבור ל-GitHub כרגע. השינויים עדיין כאן, אפשר לנסות שוב.';
 }
 function loadFromGitHub(){
@@ -915,7 +921,7 @@ function loadFromGitHub(){
     gh.dataText = text;
     var d = null; try { d = text ? JSON.parse(text) : null; } catch(e){}
     saved = normalize(d); draft = clone(saved); dirty = false; canEdit = true; loaded = true;
-    if (draft.works.some(function(w){ return w.visible && w.images.length && draft.pages.indexOf(w.id) === -1; })) dirty = true;
+    if (draft.works.some(function(w){ return w.visible && w.images.length && draft.pages.indexOf(w.id) === -1; })){ dirty = true; needPages = true; }
     saveCfg(cfg);
   });
 }
@@ -1386,7 +1392,39 @@ function closeLB(v){
 }
 
 /* ---------- owner chrome ---------- */
+function pendingChanges(){
+  var out = [], S = saved, D = draft;
+  var SITE = {name:'שם העסק', tagline:'שורת התיאור', about:'„כמה מילים עליי”', phone:'מספר הוואטסאפ', waMessage:'הודעת הוואטסאפ', instagram:'קישור האינסטגרם', logo:'הלוגו', cover:'תמונת השער', priceText:'נוסח המחירון', showName:'הצגת השם ליד הלוגו', gcCode:'קוד הסטטיסטיקה', a11yName:'רכז/ת הנגישות', a11yPhone:'טלפון לפניות נגישות', a11yEmail:'דוא"ל לפניות נגישות'};
+  Object.keys(SITE).forEach(function(k){ if ((S.site[k] || '') !== (D.site[k] || '')) out.push('שונה: ' + SITE[k]); });
+  if (JSON.stringify(S.theme) !== JSON.stringify(D.theme)) out.push(S.theme.skin !== D.theme.skin ? 'סט עיצובי חדש: ' + SKINS[D.theme.skin].name : 'שינויי עיצוב (צבעים, גופנים או צורות)');
+  if (JSON.stringify(S.categories) !== JSON.stringify(D.categories)) out.push('שינויים בקטגוריות');
+  if (JSON.stringify(S.prices) !== JSON.stringify(D.prices)) out.push('שינוי במחירון');
+  var sm = {}; S.works.forEach(function(w){ sm[w.id] = w; });
+  var dm = {}; D.works.forEach(function(w){ dm[w.id] = w; });
+  var add = D.works.filter(function(w){ return !sm[w.id]; }).length, del = S.works.filter(function(w){ return !dm[w.id]; }).length;
+  var chg = D.works.filter(function(w){ return sm[w.id] && JSON.stringify(sm[w.id]) !== JSON.stringify(w); }).length;
+  var ord = S.works.map(function(w){ return w.id; }).filter(function(id){ return dm[id]; }).join() !== D.works.map(function(w){ return w.id; }).filter(function(id){ return sm[id]; }).join();
+  if (add) out.push('נוספו ' + plural(add)); if (del) out.push('נמחקו ' + plural(del)); if (chg) out.push('נערכו ' + plural(chg)); if (ord && !chg) out.push('שינוי בסדר העבודות');
+  if (needPages) out.push('יצירת מספרי עבודות וקישורים לתמונות (נדרש פעם אחת אחרי עדכון האתר)');
+  return out;
+}
+function showPending(){
+  var list = pendingChanges(), box = document.getElementById('docbox');
+  doc.open = 'pending'; doc.ret = null; box.hidden = false; document.body.style.overflow = 'hidden';
+  box.innerHTML = '<div class="ed-back" data-act="doc-close"></div><div class="docpage" role="dialog" aria-modal="true" aria-label="שינויים שעדיין לא באתר">' +
+    '<button class="ed-x doc-x" data-act="doc-close" aria-label="סגירה">×</button><h2>מה עוד לא באתר</h2>' +
+    (list.length ? '<p>השינויים האלה שמורים רק במכשיר הזה. הלקוחות יראו אותם אחרי „פרסום השינויים”:</p><ul>' + list.map(function(x){ return '<li>'+esc(x)+'</li>'; }).join('') + '</ul>'
+                 : '<p>לא נמצא שינוי מהותי. אפשר לבטל ולהעלים את ההודעה.</p>') +
+    (lastErr ? '<div class="warn" role="alert"><strong>הפרסום האחרון נכשל:</strong><br>'+esc(lastErr)+'</div>' : '') +
+    '<div class="ctas" style="margin-top:16px"><button class="btn" data-act="publish">פרסום השינויים</button>' +
+    '<button class="btn danger" data-act="discard">'+(ed.pending === 'discard' ? 'לחיצה נוספת לביטול כל השינויים' : 'ביטול השינויים')+'</button></div></div>';
+  box.querySelector('.doc-x').focus();
+}
 function renderOwnerChrome(){
+  var bar = document.getElementById('draft-bar');
+  if (bar && canEdit && dirty){
+    bar.innerHTML = '<span>' + (lastErr ? 'הפרסום נכשל. השינויים עדיין לא באתר' : 'יש שינויים שעדיין לא באתר') + '</span><button class="alt" data-act="show-pending">מה השתנה?</button><button data-act="publish">פרסום השינויים</button>';
+  }
   document.getElementById('admin-pill').hidden = !canEdit || ed.open;
   document.getElementById('draft-bar').hidden = !canEdit || !dirty;
 }
@@ -1853,11 +1891,12 @@ function publish(){
   .then(function(sha){
     gh.sha = sha; gh.dataText = state._text; delete state._text;
     for (var k in localSrc) pendingSrc[k] = localSrc[k];
-    saved = state; draft = clone(state); dirty = false;
+    saved = state; draft = clone(state); dirty = false; needPages = false; lastErr = '';
+    if (doc.open === 'pending'){ doc.open = null; renderDoc(); }
     busy.remove(); render(); if (ed.open) renderEditor();
     toast('פורסם. הלקוחות יראו את העדכון בקישור תוך דקה-שתיים.', 5000);
   }).catch(function(e){
-    busy.remove();
+    busy.remove(); lastErr = e && e.changed ? 'הגלריה עודכנה ממכשיר אחר. צריך לרענן את הדף.' : ghError(e); renderOwnerChrome(); if (doc.open === 'pending') showPending();
     if (e && e.changed){ toast('הגלריה עודכנה ממכשיר אחר. כדי לא לדרוס את השינויים שלו, צריך לרענן את הדף ולבצע את השינויים מחדש.', 8000); return; }
     toast(ghError(e), 6000);
   });
@@ -1881,7 +1920,7 @@ document.addEventListener('click', function(e){
   if (t.dataset.tag){ ui.q = t.dataset.tag; ui.cat = 'all'; ui.type = 'all'; closeLB(); render(); var g = document.getElementById('works'); if (g) g.scrollIntoView(); return; }
   if (t.dataset.tab){ ed.tab = t.dataset.tab; ed.pending = null; renderEditor(); return; }
   var a = t.dataset.act, id = t.dataset.id, w = id && draft.works.filter(function(x){return x.id===id;})[0];
-  if (ed.pending && a !== 'w-del' && a !== 'c-del' && a !== 'close-editor' && a !== 'logout' && a !== 'approve-all' && a !== 'ai-off' && a !== 'th-reset' && a !== 'gc-key-del'){ ed.pending = null; if (ed.open) renderEditor(); }
+  if (ed.pending && a !== 'discard' && a !== 'w-del' && a !== 'c-del' && a !== 'close-editor' && a !== 'logout' && a !== 'approve-all' && a !== 'ai-off' && a !== 'th-reset' && a !== 'gc-key-del'){ ed.pending = null; if (ed.open) renderEditor(); }
   switch (a){
     case 'clear': ui = {q:'', cat:'all', type:'all', all:false}; render(); break;
     case 'st-days': ST.days = +t.dataset.k; loadStats(); break;
@@ -1899,6 +1938,11 @@ document.addEventListener('click', function(e){
       window.scrollTo({top:0, behavior: motionAllowed() ? 'smooth' : 'auto'});
       var bh = document.querySelector('.home-badge'); if (bh) bh.focus({preventScroll:true});
       break;
+    case 'show-pending': showPending(); break;
+    case 'discard':
+      if (ed.pending !== 'discard'){ ed.pending = 'discard'; showPending(); return; }
+      ed.pending = null; draft = clone(saved); dirty = needPages; lastErr = ''; doc.open = null; renderDoc(); render(); if (ed.open) renderEditor();
+      toast(needPages ? 'השינויים בוטלו. נשאר רק עדכון חד-פעמי של מספרי העבודות, שדורש פרסום אחד.' : 'השינויים בוטלו. הגלריה חזרה למה שמפורסם באתר.', 6000); break;
     case 'col-back': ui.cat = 'all'; ui.all = false; ui.q = ''; var qi = document.getElementById('q'); if (qi) qi.value = ''; renderGrid(); scrollWorks(); break;
     case 'cover-del': draft.site.cover = ''; markDirty(); break;
     case 'lb-close': closeLB(); break;
